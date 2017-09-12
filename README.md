@@ -1,2 +1,2 @@
 # GoEasy
-# Participiants: Christopher 
+# Team members: Christopher, Eetu Laukka,
