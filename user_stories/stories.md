@@ -1,3 +1,11 @@
 User story 1 (old person):
 
 Gustav is 65 years old, he is retired, and now he is using GoEasy to keep up on his daily tasks. First Gustav don't know how to use the application, he doesn't know what all the buttons do. Gustav presses a question mark, thinking, this must be the help section. Now Gustav sees a quick guide on how to use the app. Now Gustav knows a littlebit how to use the app. Gustav creates his main tasks of the week to GoEasy, he presses the day that he needs to go to the store. Now the todo list appears for that day, and he writes a task in there to go to the store at a certain time. Gustav fills in the rest of his week. If there is new tasks Gustav will fill them later throughout the week. Gustav creates a recurring task, since he needs to create a task for everyday to remember to take a pill. Gustav puts the task to recurr every day at 8am for 3 months. Now everyday when Gustav goes to the GoEasy app, he will see a notification after 8am that he needs to take a pill. And then he can remove the take a pill task, this way Gustav knows that the pill has been taken for the day, and he doesn't need to worry about it. Today is the shop day, he checks the todo task, and he reminds that he needs toilet paper, and adds it to his shopping list, which is on the todo task. Gustav goes to the store, and when he comes back, he deletes the todo task.
+
+User story 2 (family with kids):
+
+En familie på fem:
+
+Kari og Hermann bor sammen med sine tre små barn i hovedstaden. Kari jobber som grafisk designer og Hermann eier et snekkerfirma. Som travle foreldre er Kari og Hermann helt  avhengig av god planlegging både på fritiden og i jobbsammenheng. 
+
+Småbarnsforeldrene har bruk for en kalender som er lett tilgjengelig, enkel å bruke og som kan inneholde en ”to do list”. I jobbsammenheng  trenger de en planlegger som kan legge inn klokkeslett, tema og varsling (dagen nærmer seg). Kalenderen må selvfølgelig vise år, mnd, uker og dager. Det er også en fordel hvis den kan knyttes opp mot sosiale medier og lokasjon(kart). På hjemmebane trenger foreldrene en kalender som kan legge inn lister med gjøremål og aktiviteter for den kommende uken/måneden. Kanskje kalenderen også kan brukes som en handleliste?
