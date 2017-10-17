@@ -21,12 +21,13 @@ app.post('/createaccount', function (req, res) {
         //
     }
 })
-app.get('/login', function (req, res) {    
-    if (!req.body.username || !req.body.password) {
+app.get('/login/:usernme/:hash', function (req, res) {
+    let userName = req.params.username;
+    let passHash = req.params.hashM
+    if (!userName || !passHash) {
         return;
-    } else{
-        //
     }
+    res.send("username: "+userName+" hash: "+ passHash);
 })
 app.get('/tasks', function (req, res) {    
     tasks="hh";
