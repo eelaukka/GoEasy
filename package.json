@@ -4,8 +4,21 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Eetu Laukka",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express.js": "^1.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eelaukka/GoEasy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eelaukka/GoEasy/issues"
+  },
+  "homepage": "https://github.com/eelaukka/GoEasy#readme"
 }

@@ -20,26 +20,42 @@ app.post('/createaccount', function (req, res) {
     } else{
         //
     }
+    res.send("success");
 })
-app.get('/login/:username?/:hash?', function (req, res) {
-    let userName = req.params.username;
-    let passHash = req.params.hashM
+app.get('/login', function (req, res) {
+    let userName = req.query.username;
+    let passHash = req.query.hash
     if (!userName || !passHash) {
         return;
     }
-    res.send("username: "+userName+" hash: "+ passHash);
+    res.send("success");
 })
-app.get('/tasks', function (req, res) {    
+app.get('/tasks/:username', function (req, res) {    
     tasks="hh";
-    res.send(tasks);
+    res.send("json");
+    
 })
-app.post('/modifytask', function (req, res) {    
-    if (!req.body.username || !req.body.password) {
+app.post('/createtask', function (req, res) {    
+    if (!req.body.id || !req.body.title || !req.body.date) {
         return;
     } else{
         
     }
+    res.send("success");
+})
+app.post('/modifytask', function (req, res) {    
+    if (!req.body.id || !req.body.title || !req.body.date) {
+        return;
+    } else{
+        
+    }
+    res.send("success");
 })
 app.delete('/deletetask', function (req, res) {    
-    
+    if (!req.body.id || !req.body.token) {
+        return;
+    } else{
+        
+    }
+    res.send("success");
 })
