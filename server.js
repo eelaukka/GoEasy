@@ -10,7 +10,7 @@ app.listen(process.env.PORT || 8080, function () {
 app.use(express.static('public'))
 //
 app.get('/', function (req, res) {    
-    res.send("hello");
+    res.send("goeasy2");
 })
 
 
