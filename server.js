@@ -21,7 +21,7 @@ app.post('/createaccount', function (req, res) {
         //
     }
 })
-app.get('/login/:usernme/:hash', function (req, res) {
+app.get('/login/:username/:hash', function (req, res) {
     let userName = req.params.username;
     let passHash = req.params.hashM
     if (!userName || !passHash) {
