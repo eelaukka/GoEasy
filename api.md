@@ -181,7 +181,7 @@ Required:
 Data Params
 
 Task ID = [Integer];
-Toke = = [Integer];
+Token = [Integer];
 
 Success Response:
 
