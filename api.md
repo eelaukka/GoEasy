@@ -4,7 +4,7 @@ Creates new account and adds it to database
 
 URL
 
-/createaccount
+http://go-easy.herokuapp.com/createaccount   
 
 Method:
 
@@ -39,7 +39,7 @@ Input fields for username and password
 
 URL
 
-/login
+http://go-easy.herokuapp.com/login
 
 Method:
 
@@ -74,7 +74,7 @@ Shows all the task with title, date and description
 
 URL
 
-/task/:username:
+http://go-easy.herokuapp.com/task/:username:
 
 Method:
 
@@ -103,7 +103,7 @@ Creates a task with title, date and description
 
 URL
 
-/createtask
+http://go-easy.herokuapp.com/createtask
 
 Method:
 
@@ -135,7 +135,7 @@ Modifies Task, delete, change title and description etc.
 
 URL
 
-/modifytask
+http://go-easy.herokuapp.com/modifytask
 
 Method:
 
@@ -166,7 +166,7 @@ Makes it possible to delete task
 
 URL
 
-/deletetask
+http://go-easy.herokuapp.com/deletetask
 
 Method:
 
