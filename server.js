@@ -1,8 +1,8 @@
-const express = require('express')
-const app = express()
-const {
-    Client
-} = require('pg');
+const url = require('url')
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const {Client} = require("pg");
 
 const client = new Client({
     connectionString: process.env.DATABASE_URL || "postgres://xjcnfjccvbpepn:198cb597d44207d8239ae13641a103e7c47617566775bf0b73869923a841305d@ec2-54-75-225-143.eu-west-1.compute.amazonaws.com:5432/dai971uulqhd0f?ssl=true",
@@ -22,17 +22,30 @@ client.connect();
 //});
 
 
-app.listen(process.env.PORT || 8080, function () {
-    console.log('Example app listening on port 8080!')
-})
-app.use(express.static('public'))
+app.set('port', (process.env.PORT || 8080));
+app.use(express.static('public'));
+app.use(bodyParser.json());
+
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, ACCEPT");
+});
+
 //
 app.get('/', function (req, res) {
     res.send("goeasy3");
 })
 
+app.listen(app.get('port'), function() {
+    console.log('Goeasy', app.get('port'));
+});
+
 
 app.post('/createuser', function (req, res) {
+    console.log(req.body);
+    var data = JSON.parse(req.body);
+    console.log(data);
     if (!req.body.loginname || !req.body.password) {
         return;
     } else {
