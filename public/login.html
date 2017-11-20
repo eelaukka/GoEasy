@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>GoEasy - Create account</title>
+    <script src="superfetch.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form class="pure-form">
+            <img src="Pictures/avatar.png" alt="Logo" width="300" height="110">
+            <br><br><br>
+            <input id="inpLoginname" placeholder="Username" required> <br>
+            <input type="password" id="inpPassword" placeholder="Password" required> <br>
+            <input type="password" id="inpConfirmPassword" placeholder="Confirm Password" required> <br>
+            <center>
+                <p>Add an avatar:</p> <input id="inpImage" type="file" style="width:200px" class="choose_file" required> </center>
+            <button type="submit" id="btnCreate" class="button">Create user</button>
+            <p>Have a user? <a href="02_login_app.html">Log in here</a></p>
+            <h3 id="txtMsg" class="txtCss"></h3>
+        </form>
+    </div>
+</body>
+
+<script>
+    // init ------------------------------------------ 
+    var inpLoginname = document.getElementById("inpLoginname");
+    var inpPassword = document.getElementById("inpPassword");
+    var inpConfirmPassword = document.getElementById("inpConfirmPassword");
+    var inpImage = document.getElementById("inpImage");
+    var btnCreate = document.getElementById("btnCreate");
+    var txtMsg = document.getElementById("txtMsg");
+
+    btnCreate.onclick = createUser;
+    inpImage.onchange = selectFile;
+
+    var imgfile = "";
+
+    // ------------------------------------------------
+
+    function validatePassword() {
+
+        if (inpPassword.value != inpConfirmPassword.value) {
+            inpConfirmPassword.setCustomValidity("Passwords Don't Match");
+
+        } else {
+
+            inpConfirmPassword.setCustomValidity('');
+        }
+
+    }
+    inpPassword.onchange = validatePassword;
+    inpConfirmPassword.onkeyup = validatePassword;
+
+    // ------------------------------------------------
+
+    function createUser() {
+        let score = JSON.stringify({
+            loginname: "holla2",
+            password: "holla2",
+            avatar: imgfile
+        });
+
+
+                var url = "https://go-easy.herokuapp.com/createuser";
+//        var url = "http://localhost:8080/createuser";
+
+        var cfg = {
+            method: "POST",
+            body: score,
+            headers:{
+                        "content-type":"application/json"
+                    }
+            
+        }
+        superfetch(url, "json", succ, error, cfg);
+    }
+
+    // ------------------------------------------------
+    function succ(data) {
+
+        console.log(data);
+        txtMsg.innerHTML = "Your user has been created successfully."
+    }
+
+    // ------------------------------------------------
+    function error(error) {
+
+        console.log(error);
+        txtMsg.innerHTML = "Something went wrong. Please try again.";
+    }
+
+    // ------------------------------------------------
+
+    function selectFile(evt) {
+
+        imgfile = inpImage.files[0];
+    }
+
+</script>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .container {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        margin-top: 12%;
+        text-align: center;
+    }
+
+    input {
+        width: 30%;
+        font-size: 20px;
+        border: 0px solid;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 10px;
+
+    }
+
+    button {
+
+        width: 30%;
+        font-size: 20px;
+        border: 0px solid;
+        padding: 5px;
+        margin-top: 3%;
+        border-radius: 10px;
+        color: white;
+        background-color: #ffbf5b;
+
+
+    }
+
+    .button:hover {
+
+        background-color: #f5402c;
+        color: white;
+
+
+    }
+
+
+    body {
+
+        background-image: url("https://umad.com/img/2015/11/orange-wallpaper-background-1002-1073-hd-wallpapers.jpg ");
+    }
+
+    p {
+
+        color: white;
+        font-family: sans-serif;
+
+
+    }
+
+    .choose_file {
+
+        font-size: 12px;
+        color: white;
+
+
+
+    }
+
+
+    a:link {
+
+        text-decoration: none;
+
+    }
+
+
+    a:hover {
+        color: #f5402c;
+        text-decoration: none;
+
+    }
+
+    .txtCss {
+
+        color: white;
+        font-family: sans-serif;
+
+    }
+
+</style>
+
+</html>
