@@ -10,7 +10,8 @@
   "author": "Eetu Laukka",
   "license": "ISC",
   "dependencies": {
-    "express.js": "^1.0.0"
+    "express.js": "^1.0.0",
+    "pg": "7.4.0"
   },
   "devDependencies": {},
   "repository": {
