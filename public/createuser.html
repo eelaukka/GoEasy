@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <form class="pure-form">
-            <img src="Pictures/avatar.png" alt="Logo" width="300" height="110">
+            <img src="Pictures/logo_eksamen.png" alt="Logo" width="300" height="110">
             <br><br><br>
             <input id="inpLoginname" placeholder="Username" required> <br>
             <input type="password" id="inpPassword" placeholder="Password" required> <br>
@@ -38,6 +38,7 @@
     inpImage.onchange = selectFile;
 
     var imgfile = "";
+    var dataURL="";
 
     // ------------------------------------------------
 
@@ -58,23 +59,22 @@
     // ------------------------------------------------
 
     function createUser() {
-        let score = JSON.stringify({
-            loginname: "holla2",
-            password: "holla2",
-            avatar: imgfile
+        let data = JSON.stringify({
+            loginname: inpLoginname.value,
+            password: inpPassword.value/*,
+            avatar: dataURL*/ //image not working yet
         });
 
-
-                var url = "https://go-easy.herokuapp.com/createuser";
-//        var url = "http://localhost:8080/createuser";
+        var url = "https://go-easy.herokuapp.com/createuser";
+        //var url = "http://localhost:8080/createuser";
 
         var cfg = {
             method: "POST",
-            body: score,
-            headers:{
-                        "content-type":"application/json"
-                    }
-            
+            body: data,
+            headers: {
+                "content-type": "application/json"
+            }
+
         }
         superfetch(url, "json", succ, error, cfg);
     }
@@ -83,7 +83,7 @@
     function succ(data) {
 
         console.log(data);
-        txtMsg.innerHTML = "Your user has been created successfully."
+        txtMsg.innerHTML = data.msg;
     }
 
     // ------------------------------------------------
@@ -98,97 +98,120 @@
     function selectFile(evt) {
 
         imgfile = inpImage.files[0];
+        console.log(imgfile);
+        var fr = new FileReader();
+        fr.onload = convertToBase64(fr.result);
+        fr.readAsDataURL(imgfile);
+    }
+    
+    function convertToBase64(callback){
+        console.log(callback);
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function() {
+            var canvas = document.createElement('CANVAS');
+            var ctx = canvas.getContext('2d');
+            canvas.height = 64;
+            canvas.width = 64;
+            ctx.drawImage(this, 0, 0);
+            dataURL = canvas.toDataURL();
+            canvas = null;
+        };
+        img.src = callback;
+        
     }
 
 </script>
 
 <style>
+    
     * {
         box-sizing: border-box;
     }
-
-    .container {
+    
+       .container {
         margin: auto;
         width: 50%;
         padding: 10px;
         margin-top: 12%;
         text-align: center;
     }
-
+    
     input {
-        width: 30%;
+        width: 40%;
         font-size: 20px;
-        border: 0px solid;
+        border: 0px solid ;
         padding: 10px;
         margin-bottom: 5px;
         border-radius: 10px;
-
+        
+        background-color: #ffaa5d;
+        
     }
+    
+    
 
+
+
+    
     button {
-
-        width: 30%;
+        
+        width: 40%;
         font-size: 20px;
-        border: 0px solid;
+        border: 0px solid ;
         padding: 5px;
         margin-top: 3%;
         border-radius: 10px;
         color: white;
-        background-color: #ffbf5b;
-
-
+        background-color: #ff9937;
+        
+        
+        
     }
-
-    .button:hover {
-
-        background-color: #f5402c;
+    
+    .button:hover{
+         
+        background-color: #ff7a1d; 
         color: white;
-
-
+        
+        
     }
-
-
+    
+    
     body {
-
-        background-image: url("https://umad.com/img/2015/11/orange-wallpaper-background-1002-1073-hd-wallpapers.jpg ");
+        
+        background-image: url("https://image.ibb.co/j22U8R/bakgrunn_eksamen.png");
+         background-size: 1280px 770px;
     }
-
+    
     p {
-
-        color: white;
-        font-family: sans-serif;
-
-
+        
+        color: #ff7a1d;
+        font-family: sans-serif; 
+    
+        
     }
-
-    .choose_file {
-
-        font-size: 12px;
-        color: white;
-
-
-
-    }
-
-
+    
     a:link {
-
-        text-decoration: none;
-
+   
+    text-decoration: none;
+    
     }
-
-
+    
+    
     a:hover {
-        color: #f5402c;
-        text-decoration: none;
-
+    color: #ff7a1d;
+    text-decoration: none;
+        
     }
-
-    .txtCss {
-
-        color: white;
+    
+    
+    .txtCss{
+        
+        color: #ff7a1d;
         font-family: sans-serif;
-
+        font-size: 12px;
+        
     }
 
 </style>
