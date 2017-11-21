@@ -41,7 +41,7 @@
             avatar: dataURL*/ //image not working yet
         });
 
-        //        var url = "https://go-easy.herokuapp.com/createuser";
+        var url = "https://go-easy.herokuapp.com/login";
         //var url = "http://localhost:8080/login";
 
         var cfg = {
@@ -61,8 +61,8 @@
         
         if(data.token) {
             
-            localStorage.setItem("blogfogData", JSON.stringify(data));
-            window.location.href = "02_calendar_app.html";
+            localStorage.setItem("token", JSON.stringify(data));
+            window.location.href = "application.html";
         }
         else {
             txtMsg.innerHTML = "Something went wrong. Please try again.";
@@ -130,13 +130,13 @@
         
         
     }
-    
-    
-    body {
-        
-        background-image: url("https://image.ibb.co/j22U8R/bakgrunn_eksamen.png");
-         background-size: 1280px 770px;
-    }
+    html { 
+    background: url(https://image.ibb.co/j22U8R/bakgrunn_eksamen.png) no-repeat center center fixed #000; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}   
     
     p {
         

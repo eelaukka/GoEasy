@@ -21,9 +21,16 @@ app.get('/', function (req, res) {
     res.send(staticApp);
 });
 
-app.get('/highscores', function (request, response) {
-    //res.send(JSON.stringify(highscoreList));
-    response.send(highscoreList);
+app.get('/login', function (request, response) {
+    let reqJSON = req.body;
+    let mUser = reqJSON.loginname;
+    let mPassword = reqJSON.password;
+
+    res.status(200).send(JSON.stringify({
+        msg: "Login successful",
+        token: mUser
+    }));
+
 });
 
 app.post("/createuser", function (req, res) {
@@ -48,10 +55,10 @@ app.post("/createuser", function (req, res) {
                         msg: "Your account has been created successfully."
                     }));
                 }
-//                for (let row of ress.rows) {
-//                    console.log(JSON.stringify(row.username));
-//                    console.log(JSON.stringify(row.mpassword));
-//                }
+                //                for (let row of ress.rows) {
+                //                    console.log(JSON.stringify(row.username));
+                //                    console.log(JSON.stringify(row.mpassword));
+                //                }
                 //client.end();
             });
 
