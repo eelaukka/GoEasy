@@ -40,12 +40,12 @@
             password: inpPassword.value/*,
             avatar: dataURL*/ //image not working yet
         });
-
-        var url = "https://go-easy.herokuapp.com/login";
-        //var url = "http://localhost:8080/login";
+        console.log(data);
+//        var url = "https://go-easy.herokuapp.com/login";
+        var url = "http://localhost:8080/login";
 
         var cfg = {
-            method: "GET",
+            method: "POST",
             body: data,
             headers: {
                 "content-type": "application/json"
@@ -58,10 +58,9 @@
     
     // ------------------------------------------------
     function succ(data) {        
-        
         if(data.token) {
             
-            localStorage.setItem("token", JSON.stringify(data));
+            localStorage.setItem("token", JSON.stringify(data.token));
             window.location.href = "application.html";
         }
         else {

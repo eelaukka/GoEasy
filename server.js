@@ -21,11 +21,11 @@ app.get('/', function (req, res) {
     res.send(staticApp);
 });
 
-app.get('/login', function (request, response) {
+app.post('/login', function (req, res) {
     let reqJSON = req.body;
     let mUser = reqJSON.loginname;
     let mPassword = reqJSON.password;
-
+    console.log(mUser);
     res.status(200).send(JSON.stringify({
         msg: "Login successful",
         token: mUser
