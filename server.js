@@ -2,6 +2,7 @@ const url = require('url')
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const bcrypt = require('bcryptjs');
 const {
     Client
 } = require("pg");
@@ -21,15 +22,36 @@ app.get('/', function (req, res) {
     res.send(staticApp);
 });
 
-app.post('/login', function (req, res) {
+app.post('/login', function (req, res, next) {
     let reqJSON = req.body;
     let mUser = reqJSON.loginname;
     let mPassword = reqJSON.password;
-    console.log(mUser);
-    res.status(200).send(JSON.stringify({
-        msg: "Login successful",
-        token: mUser
-    }));
+
+    client.query(`SELECT * FROM user_table WHERE username='${mUser}';`)
+        .then(function (data) {
+            if (passwordMatchesHash(mPassword, data.rows[0].mpassword)) {
+                console.log("matched: ");
+                res.status(200)
+                .json({
+                    status: 'success',
+                    id: data.rows[0].id,
+                    username: data.rows[0].username,
+                    token: "lkjljkl",
+                    message: 'Retrieved ONE puppy'
+                });
+            }
+            else{
+                console.log("unmatched: ");
+                res.status(200).send(JSON.stringify({
+                        msg: "Your account has been created successfully."
+                    }));
+                
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+            return next(err);
+        });
 
 });
 
@@ -42,9 +64,10 @@ app.post("/createuser", function (req, res) {
     if (!mUser || !mPassword) {
         return;
     } else {
+        let mHashedPassword = getHashedPassword(mPassword);
         try {
             var mAvatar = req.body.avatar;
-            client.query(`INSERT INTO user_table (username,mpassword,avatar) VALUES ('${mUser}', '${mPassword}', '${mAvatar}');`, (err, ress) => {
+            client.query(`INSERT INTO user_table (username,mpassword,avatar) VALUES ('${mUser}', '${mHashedPassword}', '${mAvatar}');`, (err, ress) => {
                 if (err) {
                     res.status(200).send(JSON.stringify({
                         msg: "Username already exists!"
@@ -55,11 +78,6 @@ app.post("/createuser", function (req, res) {
                         msg: "Your account has been created successfully."
                     }));
                 }
-                //                for (let row of ress.rows) {
-                //                    console.log(JSON.stringify(row.username));
-                //                    console.log(JSON.stringify(row.mpassword));
-                //                }
-                //client.end();
             });
 
 
@@ -83,7 +101,12 @@ app.listen(app.get('port'), function () {
 });
 
 
-function createUser() {
+function getHashedPassword(unHashedPassword) {
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(unHashedPassword, salt);
+    return hash;
+}
 
-
+function passwordMatchesHash(input, dbPasswordHash) {
+    return bcrypt.compareSync(input, dbPasswordHash);
 }

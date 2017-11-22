@@ -36,7 +36,8 @@
     var outText = document.getElementById("outText");
     var taskList = JSON.parse(localStorage.getItem("taskList")) || {};
     var token = localStorage.getItem("token") || "";
-    mHeader.innerHTML=`Logged in as: ${token}`;
+    var mUsername = localStorage.getItem("username") || "";
+    mHeader.innerHTML=`Logged in as: ${mUsername}`;
     console.log(taskList);
     btn.onclick = function() {
         
