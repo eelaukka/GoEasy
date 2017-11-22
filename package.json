@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express.js": "^1.0.0",
-    "pg": "7.4.0"
+    "pg": "7.4.0",
+    "bcryptjs": "2"
   },
   "devDependencies": {},
   "repository": {
