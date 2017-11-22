@@ -12,9 +12,9 @@
         <br><br><br><br><br>
         <img src="Pictures/logo_eksamen.png" alt="Logo" width="115" height="45"> 
         <br><br><br>    
-        <input id="inpLoginname" placeholder="Username" required > <br>
-        <input id="inpPassword" placeholder="Password" type="password" required > <br>   
-        <button type="submit" id="btnLogin" class="button">Login</button>
+        <input id="inpLoginname" placeholder="Username"> <br>
+        <input id="inpPassword" placeholder="Password" type="password" > <br>   
+        <button id="btnLogin" class="button">Login</button>
         <p>Don't have a user? <a href="createuser.html">Create user here</a></p>    
         <h3 id="txtMsg" class="txtCss"></h3>
     </div>
@@ -34,7 +34,6 @@
 
     // ------------------------------------------------
     function loginUser() {      
-        
         
         
         let data = JSON.stringify({
@@ -63,6 +62,7 @@
             
             localStorage.setItem("token", JSON.stringify(data.token));
             localStorage.setItem("username", JSON.stringify(data.username));
+            localStorage.setItem("avatar", JSON.stringify(data.avatar));
             window.location.href = "application.html";
         }
         else {

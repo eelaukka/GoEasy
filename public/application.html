@@ -8,6 +8,7 @@
 
 <body>    
     <h3 id="user"></h3>
+    <img id="avatar">
     <input id="inpYear" type="text">
     <select id="inpMonth">
         <option value=0>January</option>
@@ -34,11 +35,17 @@
     var btn = document.getElementById("btn");
     var mHeader = document.getElementById("user");
     var outText = document.getElementById("outText");
+    var imgAvatar = document.getElementById("avatar");
     var taskList = JSON.parse(localStorage.getItem("taskList")) || {};
     var token = localStorage.getItem("token") || "";
-    var mUsername = localStorage.getItem("username") || "";
+    var mUsername = JSON.parse(localStorage.getItem("username")) || "";
+    var mDataURI = JSON.parse(localStorage.getItem("avatar")) || "";
+    
     mHeader.innerHTML=`Logged in as: ${mUsername}`;
-    console.log(taskList);
+    imgAvatar.setAttribute(
+        'src', mDataURI
+    );
+
     btn.onclick = function() {
         
         outText.innerHTML = "";        

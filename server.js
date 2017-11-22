@@ -32,20 +32,20 @@ app.post('/login', function (req, res, next) {
             if (passwordMatchesHash(mPassword, data.rows[0].mpassword)) {
                 console.log("matched: ");
                 res.status(200)
-                .json({
-                    status: 'success',
-                    id: data.rows[0].id,
-                    username: data.rows[0].username,
-                    token: "lkjljkl",
-                    message: 'Retrieved ONE puppy'
-                });
-            }
-            else{
+                    .json({
+                        status: 'success',
+                        id: data.rows[0].id,
+                        username: data.rows[0].username,
+                        avatar: data.rows[0].avatar,
+                        token: "lkjljkl",
+                        message: 'Retrieved ONE puppy'
+                    });
+            } else {
                 console.log("unmatched: ");
                 res.status(200).send(JSON.stringify({
-                        msg: "Your account has been created successfully."
-                    }));
-                
+                    msg: "Your account has been created successfully."
+                }));
+
             }
         })
         .catch(function (err) {
@@ -97,7 +97,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(app.get('port'), function () {
-    console.log('Guess my number server running', app.get('port'));
+    console.log('GoEasy running on port: ', app.get('port'));
 });
 
 

@@ -10,18 +10,16 @@
 
 <body>
     <div class="container">
-        <form class="pure-form">
             <img src="Pictures/logo_eksamen.png" alt="Logo" width="115" height="45">
             <br><br><br>
-            <input id="inpLoginname" placeholder="Username" required> <br>
-            <input type="password" id="inpPassword" placeholder="Password" required> <br>
-            <input type="password" id="inpConfirmPassword" placeholder="Confirm Password" required> <br>
+            <input id="inpLoginname" placeholder="Username"> <br>
+            <input type="password" id="inpPassword" placeholder="Password"> <br>
+            <input type="password" id="inpConfirmPassword" placeholder="Confirm Password"> <br>
             <center>
-                <p>Add an avatar:</p> <input id="inpImage" type="file" style="width:200px" class="choose_file" required> </center>
-            <button type="submit" id="btnCreate" class="button">Create user</button>
+                <p>Add an avatar:</p> <input id="inpImage" type="file" style="width:200px" class="choose_file"> </center>
+            <button id="btnCreate" class="button">Create user</button>
             <p>Have a user? <a href="index.html">Log in here</a></p>
             <h3 id="txtMsg" class="txtCss"></h3>
-        </form>
     </div>
 </body>
 
@@ -61,8 +59,8 @@
     function createUser() {
         let data = JSON.stringify({
             loginname: inpLoginname.value,
-            password: inpPassword.value/*,
-            avatar: dataURL*/ //image not working yet
+            password: inpPassword.value,
+            avatar: dataURL
         });
 
         var url = "https://go-easy.herokuapp.com/createuser";
@@ -98,14 +96,14 @@
     function selectFile(evt) {
 
         imgfile = inpImage.files[0];
-        console.log(imgfile);
         var fr = new FileReader();
-        fr.onload = convertToBase64(fr.result);
+        fr.onload = function bla(){
+            convertToBase64(fr.result);
+        }
         fr.readAsDataURL(imgfile);
     }
     
     function convertToBase64(callback){
-        console.log(callback);
         var img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = function() {
@@ -113,8 +111,9 @@
             var ctx = canvas.getContext('2d');
             canvas.height = 64;
             canvas.width = 64;
-            ctx.drawImage(this, 0, 0);
+            ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
             dataURL = canvas.toDataURL();
+            console.log("dataURL: ", dataURL)
             canvas = null;
         };
         img.src = callback;
