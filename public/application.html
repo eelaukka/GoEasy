@@ -1,46 +1,71 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-  <meta charset="utf-8" />
-  <title>Testing...</title>
-    <script src="superfetch.js"></script>
+    <meta charset="utf-8" />
+    <title>GoEasy - Calendar</title>
+    <script type="text/javascript" src="todo.js"></script>
+    <link rel="stylesheet" type="text/css" href="todo.css">
 </head>
 
-<body>    
+<body>
+
+    <br><br>
+    <center><a href="application.html"> <img src="Pictures/logo_eksamen2.png"  alt="Logo" width="180" height="80"></a></center>
     <h3 id="user"></h3>
     <img id="avatar">
-    <input id="inpYear" type="text">
-    <select id="inpMonth">
-        <option value=0>January</option>
-        <option value=1>February</option>
-        <option value=2>March</option>
-        <option value=3>April</option>
-        <option value=4>May</option>
-        <option value=5>Junne</option>
-        <option value=6>July</option>
-        <option value=7>August</option>
-        <option value=8>September</option>
-        <option value=9>October</option>
-        <option value=10>November</option>
-        <option value=11>December</option>
-    </select>
-    <button id="btn">Show days</button>
-    <button id="btn2" onClick="createTask()">Save</button>
-    <div id="outText"></div>   
+    <div class="calendar-wrapper">
+
+        <button id="btnPrev" type="button">Prev</button>
+        <button id="btnNext" type="button">Next</button>
+
+        <div id="divCal"></div>
+
+    </div>
+
+    <div class="calendar-wrapper2">
+
+
+        <div id="center-container">
+
+            <form name="form">
+                <center>
+                    <input type="text" placeholder="Enter a task for this day" id="item" name="itemEntered" />
+                    <input type="button" value="Add task" id="addTaskButton" onclick="javascript:addItem(); ClearFields();" />
+                    <input type="button" value="Remove task" id="removeTaskButton" onclick="javascript:removeItem();" />
+                </center>
+            </form>
+
+        </div>
+
+
+
+        <h2>Things to do:</h2>
+
+        <div id="items-container">
+
+            <ul id="items-listed">
+                <hr> </ul>
+
+        </div>
+
+    </div>
+
+
+
 </body>
-    
+
 <script>
-    
     var loginData = JSON.parse(localStorage.getItem("logindata"));
-    
-    if (loginData == null){
-            window.location.href = "http://localhost:8080/notfound.html";
-        }
-    
-    var inpYear = document.getElementById("inpYear");    
-    var inpMonth = document.getElementById("inpMonth");    
-    var btn = document.getElementById("btn");
+
+    if (loginData == null) {
+        window.location.href = "http://localhost:8080/notfound.html";
+    }
+
+//    var inpYear = document.getElementById("inpYear");
+//    var inpMonth = document.getElementById("inpMonth");
+//    var btn = document.getElementById("btn");
     var mHeader = document.getElementById("user");
     var outText = document.getElementById("outText");
     var imgAvatar = document.getElementById("avatar");
@@ -48,23 +73,23 @@
     var token = loginData.token;
     var mUsername = loginData.username;
     var mDataURI = loginData.avatar;
-    
-    mHeader.innerHTML=`Logged in as: ${mUsername} with token: ${token}`;
+
+    mHeader.innerHTML = `Logged in as: ${mUsername}`;
     imgAvatar.setAttribute(
         'src', mDataURI
     );
 
-    btn.onclick = function() {
-        
-        outText.innerHTML = "";        
+    /*btn.onclick = function() {
 
-        var d = new Date(inpYear.value, inpMonth.value);        
-        var month = d.getMonth();        
+        outText.innerHTML = "";
+
+        var d = new Date(inpYear.value, inpMonth.value);
+        var month = d.getMonth();
         var i = 1;
         var m = month;
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         d.setDate(i);
-        
+
         while (m == month) {
             let dateId = d.toDateString().replace(/ /g, '');
             var html = `<div class="wrapper">
@@ -78,32 +103,25 @@
                             <div class="clr"></div>
                         </div>
                         <hr>`;
-            
+
             outText.innerHTML += html;
-            
+
             i++;
             d.setDate(i);
             m = d.getMonth(); //are we passed current month?           
         }
-    }
-    
-    function save(context){
+    }*/
+
+    /*function save(context) {
         var dayKey = context.id;
         taskList[dayKey] = context.value;
         localStorage.setItem("taskList", JSON.stringify(taskList));
-        
+
     }
-    
-    
-    function createTask() {/*
-        
-        let reqJSON = req.body;
-    let mTitle = reqJSON.title;
-    let mDate = reqJSON.date;
-    let mDescription = reqJSON.description;
-    let mDone = true;
-    let mUser = reqJSON.user;*/
-        
+*/
+
+    function createTask() {
+
         let data = JSON.stringify({
             title: "Godrink",
             date: "29292922",
@@ -111,8 +129,8 @@
             user: "Eetu"
         });
 
-        var url = "https://go-easy.herokuapp.com/tasks/save?token="+token;
-//        var url = "http://localhost:8080/tasks/save?token="+token;
+        var url = "https://go-easy.herokuapp.com/tasks/save?token=" + token;
+//                var url = "http://localhost:8080/tasks/save?token="+token;
 
         var cfg = {
             method: "POST",
@@ -124,16 +142,17 @@
         }
         superfetch(url, "json", succ, error, cfg);
     }
-        
-    function deleteTask(task_id) {/*
-        
-        let reqJSON = req.body;
-    let mTitle = reqJSON.title;
-    let mDate = reqJSON.date;
-    let mDescription = reqJSON.description;
-    let mDone = true;
-    let mUser = reqJSON.user;*/
-        
+
+    function deleteTask(task_id) {
+        /*
+                
+                let reqJSON = req.body;
+            let mTitle = reqJSON.title;
+            let mDate = reqJSON.date;
+            let mDescription = reqJSON.description;
+            let mDone = true;
+            let mUser = reqJSON.user;*/
+
         let data = JSON.stringify({
             title: "Godrink",
             date: "29292922",
@@ -141,8 +160,8 @@
             user: "Eetu"
         });
 
-//        var url = "https://go-easy.herokuapp.com/createuser";
-        var url = "http://localhost:8080/tasks/save?token="+token;
+                var url = "https://go-easy.herokuapp.com/createuser";
+//        var url = "http://localhost:8080/tasks/save?token=" + token;
 
         var cfg = {
             method: "DELETE",
@@ -154,13 +173,13 @@
         }
         superfetch(url, "json", succ, error, cfg);
     }
-    
-    
+
+
     function succ(data) {
 
         console.log(data);
-//        inputs.style.display = 'none';        
-//        txtMsg.innerHTML = data.msg;
+        //        inputs.style.display = 'none';        
+        //        txtMsg.innerHTML = data.msg;
     }
 
     // ------------------------------------------------
@@ -169,46 +188,10 @@
         console.log(error);
         //txtMsg.innerHTML = "Something went wrong. Please try again.";
     }
-    
+
 </script>
-    
-<style>
-    
-    .wrapper{
-        display: table-row;
-        height: auto;
-    }
-    
-    .day {
-        display: table-cell;
-        width: 150px;
-    }
-    
-    .taskDesc{
-        display: table-cell;
-        vertical-align: middle;
-    }
-    
-    .day>h3 {
-        line-height: 5px;
-        font-family: sans-serif;
-    }
-    .day>h1 {
-        line-height: 0px;
-        font-family: sans-serif;
-    }
-    
-    body {
-        
-        background-image: url("https://image.ibb.co/gThAyR/bakgrunn_eksamen2.png");
-    
-    }
-   
 
-    
-</style>
-    
 
-    
+
+
 </html>
-

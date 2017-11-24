@@ -47,7 +47,7 @@
                         avatar: dataURL*/ //image not working yet
         });
         var url = "https://go-easy.herokuapp.com/users/login";
-        //        var url = "http://localhost:8080/users/login";
+//                var url = "http://localhost:8080/users/login";
 
         var cfg = {
             method: "POST",
@@ -65,7 +65,7 @@
     function succ(data) {
         if (data.token) {
             localStorage.setItem("logindata", JSON.stringify(data));
-            //            window.location.href = "http://localhost:8080/tasks?token=" + data.token;
+//                        window.location.href = "http://localhost:8080/tasks?token=" + data.token;
             window.location.href = "https://go-easy.herokuapp.com/tasks?token=" + data.token;
         } else {
             txtMsg.innerHTML = "Something went wrong. Please try again.";

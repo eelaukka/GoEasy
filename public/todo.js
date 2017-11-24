@@ -130,7 +130,7 @@ else if ( i == 1 ) {
     html += '<tr>';
     var k = lastDayOfLastMonth - firstDayOfMonth+1;
     for(var j=0; j < firstDayOfMonth; j++) {
-    html += "<td onclick=document.location.href='02_todo_app.html' class='not-current'    >" + k + '</td>';
+    html += "<td onclick=document.location.href='application.html' class='not-current'    >" + k + '</td>';
         k++;
       }
     }
@@ -141,9 +141,9 @@ else if ( i == 1 ) {
     var chkM = chk.getMonth();
     if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
         
-      html += "<td onclick=document.location.href='02_todo_app.html' class='today'>" + i + '</td>';
+      html += "<td onclick=document.location.href='application.html' class='today'>" + i + '</td>';
     } else {
-      html += "<td onclick=document.location.href='02_todo_app.html' class='normal'>" + i + '</td>';
+      html += "<td onclick=document.location.href='application.html' class='normal'>" + i + '</td>';
     }
 // If Saturday, closes the row
     if ( dow == 6 ) {
@@ -154,7 +154,7 @@ else if ( i == 1 ) {
     else if ( i == lastDateOfMonth ) {
       var k=1;
       for(dow; dow < 6; dow++) {
-        html += "<td onclick=document.location.href='02_todo_app.html' class='not-current'>" + k + '</td>';
+        html += "<td onclick=document.location.href='application.html' class='not-current'>" + k + '</td>';
         k++;
       }
         
