@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>GoEasy - Calendar</title>
+    <script type="text/javascript" src="todo.js"></script>
+    <link rel="stylesheet" type="text/css" href="todo.css">
+</head>
+
+<body>  
+    
+    <br><br>
+    <center><a href="02_todo_app.html"> <img src="Pictures/logo_eksamen2.png"  alt="Logo" width="180" height="80"></a></center>
+    
+<div class="calendar-wrapper">
+        
+    <button id="btnPrev" type="button">Prev</button>
+    <button id="btnNext" type="button">Next</button>
+    
+    <div id="divCal"></div>
+    
+</div>
+    
+<div class="calendar-wrapper2"> 
+    
+    
+    <div id="center-container">
+
+    <form name="form">
+        <center>
+    <input type="text" placeholder="Enter a task for this day" id="item" name="itemEntered"   />
+    <input type="button"  value="Add task" id="addTaskButton" onclick="javascript:addItem(); ClearFields();" />
+    <input type="button" value="Remove task" id="removeTaskButton" onclick="javascript:removeItem();" /> 
+        </center>
+    </form>
+      
+  </div>
+    
+    
+    
+    <h2>Things to do:</h2>
+
+    <div id="items-container">
+
+    <ul id="items-listed"> <hr> </ul>
+    
+</div>
+    
+    </div>
+    
+
+    
+</body>
+    
+</html>
+

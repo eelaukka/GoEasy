@@ -1,0 +1,240 @@
+      
+html,body {
+  height: 100%;
+}  
+    
+body {
+  font-size: 100%;
+  line-height: 1.5;
+  font-family:sans-serif;
+  background-image: url("https://www.walldevil.com/wallpapers/h14/wallpapers-orange-fantastic-wallpaper-light.jpg")
+
+}
+*{
+  box-sizing: border-box;
+}
+  
+#addTaskButton {
+        
+    width: 44.5%;
+    font-size: 20px;
+    border: 0px solid ;
+    padding: 10px;
+    margin-top: 3%;
+    border-radius: 15px;
+    color: white;
+    background-color: #d5603d;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+                  
+}
+    
+#addTaskButton:hover{
+         
+    background-color: #f1b84d; 
+    color: white;
+        
+}
+
+#removeTaskButton {
+    
+    
+        
+    width: 44.5%;
+    font-size: 20px;
+    border: 0px solid ;
+    padding: 10px;
+    margin-top: 3%;
+    border-radius: 15px;
+    color: white;
+    background-color: #d5603d;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+                  
+}
+    
+#removeTaskButton:hover{
+         
+    background-color: #f1b84d; 
+    color: white;
+        
+}
+    
+    
+::placeholder { 
+    color: white;
+    text-align: center;
+}
+    
+input, select, textarea{
+    color: white;
+}
+    
+input {
+  
+    width: 90%;
+    font-size: 20px;
+    border: 0px solid ;
+    padding: 10px;
+    margin-bottom: 2px;
+    border-radius: 15px;
+    background-color: #f1b84d;
+}
+    
+h2 {
+    color: #f1b84d;
+    font-family: sans-serif;
+    text-align: center;
+        
+}
+    
+li {
+        
+    color: #d5603d;
+    font-size: 20px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+hr { 
+        
+    background-color: #f1b84d; 
+    height: 2px; 
+    border: 0; }
+
+
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: baseline;
+}
+
+.calendar-wrapper {
+  width: 560px;
+    min-height: 450px;
+  margin: 3em auto;
+  padding: 2em;
+  border: 0px solid;
+  border-radius: 20px;
+  background: #fff;
+}
+    
+.calendar-wrapper2 {
+    
+  width: 560px; 
+    min-height: 450px;
+  margin: 2em auto;
+  padding: 2em;
+  border: 0px solid;
+  border-radius: 20px;
+  background: white;
+}
+    
+table {
+  clear: both;
+  width: 100%;
+  border: 0px solid ;
+  border-radius: 3px;
+  border-collapse: collapse;
+  color: #444;
+}
+    
+td {
+  height: 48px;
+  text-align: center;
+  vertical-align: middle;
+  border-right: 0px solid ;
+  border-top: 0px solid ;
+  width: 14.28571429%;
+}
+    
+td.not-current {
+  color: #c0c0c0;
+}
+    
+td.today {
+  font-weight: 700;
+  color: white;
+  font-size: 1.5em;
+  border-radius: 50%;
+	width: 50px;
+	height: 70px; 
+	background: #f1b84d;
+	
+}
+
+td:hover {
+    
+    color: #d5603d;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    
+}
+
+
+   
+thead td {
+  border: none;
+  color: #f1b84d;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+       
+       
+#btnPrev {
+  float: left;
+  margin-bottom: 20px;
+}
+    
+
+#btnNext {
+  float: right;
+  margin-bottom: 20px;
+}
+    
+#btnToday{
+  float: center;
+  margin-bottom: 20px;
+}
+    
+
+
+#btnPrev, #btnNext, #btnToday {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #c0c0c0;
+  cursor: pointer;
+  font-family:sans-serif;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#btnPrev:hover, #btnNext:hover {
+  color: #d5603d;
+  font-weight: bold;
+    
+}      
+input[type='checkbox'] {
+  float: bottom;
+  width: 20px;
+}
+input[type='checkbox'] + label {
+  display: block;
+  width: 30px;
+}
+
+
+
+

@@ -3,7 +3,6 @@ function superfetch(url, type, success, fail, settings) {
 
     fetch(url, settings).then(function(response){
             //1. stage
-        console.log(response);
         if (response.ok) {
             
             if (type == "json") {
@@ -17,7 +16,8 @@ function superfetch(url, type, success, fail, settings) {
             }
             
         } else {
-            throw new Error("something went wrong!");
+            console.log(response);
+            throw new Error(response.status);
         }
 
     }).then(function(data){
@@ -26,8 +26,8 @@ function superfetch(url, type, success, fail, settings) {
         success(data);
 
     }).catch(function(error){
-
+        console.log(error);
+        
         fail(error);
-
     }); //end fetch
 }

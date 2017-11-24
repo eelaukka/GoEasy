@@ -12,12 +12,14 @@
     <div class="container">
             <img src="Pictures/logo_eksamen.png" alt="Logo" width="115" height="45">
             <br><br><br>
-            <input id="inpLoginname" placeholder="Username"> <br>
-            <input type="password" id="inpPassword" placeholder="Password"> <br>
-            <input type="password" id="inpConfirmPassword" placeholder="Confirm Password"> <br>
-            <center>
-                <p>Add an avatar:</p> <input id="inpImage" type="file" style="width:200px" class="choose_file"> </center>
-            <button id="btnCreate" class="button">Create user</button>
+            <div id="inputs">
+                <input id="inpLoginname" placeholder="Username"> <br>
+                <input type="password" id="inpPassword" placeholder="Password"> <br>
+                <input type="password" id="inpConfirmPassword" placeholder="Confirm Password"> <br>
+                <center>
+                    <p>Add an avatar:</p> <input id="inpImage" type="file" style="width:200px" class="choose_file"> </center>
+                <button id="btnCreate" class="button">Create user</button>
+            </div>
             <p>Have a user? <a href="index.html">Log in here</a></p>
             <h3 id="txtMsg" class="txtCss"></h3>
     </div>
@@ -29,6 +31,7 @@
     var inpPassword = document.getElementById("inpPassword");
     var inpConfirmPassword = document.getElementById("inpConfirmPassword");
     var inpImage = document.getElementById("inpImage");
+    var inputs = document.getElementById("inputs");
     var btnCreate = document.getElementById("btnCreate");
     var txtMsg = document.getElementById("txtMsg");
 
@@ -63,8 +66,8 @@
             avatar: dataURL
         });
 
-        var url = "https://go-easy.herokuapp.com/createuser";
-//        var url = "http://localhost:8080/createuser";
+        var url = "https://go-easy.herokuapp.com/users/createuser";
+//        var url = "http://localhost:8080/users/createuser";
 
         var cfg = {
             method: "POST",
@@ -81,6 +84,7 @@
     function succ(data) {
 
         console.log(data);
+        inputs.style.display = 'none';        
         txtMsg.innerHTML = data.msg;
     }
 

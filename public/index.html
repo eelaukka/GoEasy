@@ -1,48 +1,53 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-  <meta charset="utf-8" />
-  <title>GoEasy - Login</title>
-  <script src="superfetch.js"></script>
+    <meta charset="utf-8" />
+    <title>GoEasy - Login</title>
+    <script src="superfetch.js"></script>
 </head>
 
 <body>
     <div class="container">
         <br><br><br><br><br>
-        <img src="Pictures/logo_eksamen.png" alt="Logo" width="115" height="45"> 
-        <br><br><br>    
+        <img src="Pictures/logo_eksamen.png" alt="Logo" width="115" height="45">
+        <br><br><br>
         <input id="inpLoginname" placeholder="Username"> <br>
-        <input id="inpPassword" placeholder="Password" type="password" > <br>   
+        <input id="inpPassword" placeholder="Password" type="password"> <br>
         <button id="btnLogin" class="button">Login</button>
-        <p>Don't have a user? <a href="createuser.html">Create user here</a></p>    
+        <p>Don't have a user? <a href="createuser.html">Create user here</a></p>
         <h3 id="txtMsg" class="txtCss"></h3>
     </div>
 </body>
-    
+
 <script>
-    
+    var regUsername = new RegExp('^[a-zA-Z0-9]+([-_]?[a-zA-Z0-9])+$');
+    var regPassw = new RegExp('^([a-zA-Z0-9Ø#@&\(§!\)-_\$\*€\^%£=\+\/:\.;,\?])+$');
+
+
     // init ------------------------------------------ 
     var inpLoginname = document.getElementById("inpLoginname");
-    var inpPassword  = document.getElementById("inpPassword");   
-    var btnLogin    = document.getElementById("btnLogin");
-    var txtMsg       = document.getElementById("txtMsg");    
-    
-    btnLogin.onclick = loginUser;  
-    
-    
+    var inpPassword = document.getElementById("inpPassword");
+    var btnLogin = document.getElementById("btnLogin");
+    var txtMsg = document.getElementById("txtMsg");
+
+    btnLogin.onclick = loginUser;
+
+
 
     // ------------------------------------------------
-    function loginUser() {      
-        
-        
+    function loginUser() {
+
+
         let data = JSON.stringify({
             loginname: inpLoginname.value,
-            password: inpPassword.value/*,
-            avatar: dataURL*/ //image not working yet
+            password: inpPassword.value
+            /*,
+                        avatar: dataURL*/ //image not working yet
         });
-        var url = "https://go-easy.herokuapp.com/login";
-//        var url = "http://localhost:8080/login";
+        var url = "https://go-easy.herokuapp.com/users/login";
+        //        var url = "http://localhost:8080/users/login";
 
         var cfg = {
             method: "POST",
@@ -53,122 +58,119 @@
 
         }
         superfetch(url, "json", succ, error, cfg);
-              
+
     }
-    
+
     // ------------------------------------------------
-    function succ(data) {        
-        if(data.token) {
-            
-            localStorage.setItem("token", JSON.stringify(data.token));
-            localStorage.setItem("username", JSON.stringify(data.username));
-            localStorage.setItem("avatar", JSON.stringify(data.avatar));
-            window.location.href = "application.html";
-        }
-        else {
+    function succ(data) {
+        if (data.token) {
+            localStorage.setItem("logindata", JSON.stringify(data));
+            //            window.location.href = "http://localhost:8080/tasks?token=" + data.token;
+            window.location.href = "https://go-easy.herokuapp.com/tasks?token=" + data.token;
+        } else {
             txtMsg.innerHTML = "Something went wrong. Please try again.";
         }
     }
-    
+
     // ------------------------------------------------
     function error(error) {
-               
-        txtMsg.innerHTML = "Something went wrong. Please try again.";      
-    }    
-    
+        console.log(error);
+        txtMsg.innerHTML = "Something went wrong. Please try again.";
+    }
+
 </script>
-    
+
 <style>
-    
     * {
         box-sizing: border-box;
     }
-    
-       .container {
+
+    .container {
         margin: auto;
         width: 50%;
         padding: 10px;
         margin-top: 12%;
         text-align: center;
     }
-    
+
     input {
         width: 40%;
         font-size: 20px;
-        border: 0px solid ;
+        border: 0px solid;
         padding: 10px;
         margin-bottom: 5px;
         border-radius: 10px;
-        
+
         background-color: #ffaa5d;
-        
+
     }
-    
-    
 
 
 
-    
+
+
+
     button {
-        
+
         width: 40%;
         font-size: 20px;
-        border: 0px solid ;
+        border: 0px solid;
         padding: 5px;
         margin-top: 3%;
         border-radius: 10px;
         color: white;
         background-color: #ff9937;
-        
-        
-        
+
+
+
     }
-    
-    .button:hover{
-         
-        background-color: #ff7a1d; 
+
+    .button:hover {
+
+        background-color: #ff7a1d;
         color: white;
-        
-        
+
+
     }
-    html { 
-    background: url(https://image.ibb.co/gThAyR/bakgrunn_eksamen2.png) no-repeat center center fixed #000; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}   
-    
+
+    html {
+        background: url(https://image.ibb.co/gThAyR/bakgrunn_eksamen2.png) no-repeat center center fixed #000;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
     p {
-        
+
         color: #ff7a1d;
-        font-family: sans-serif; 
-    
-        
+        font-family: sans-serif;
+
+
     }
-    
+
     a:link {
-   
-    text-decoration: none;
-    
+
+        text-decoration: none;
+
     }
-    
-    
+
+
     a:hover {
-    color: #ff7a1d;
-    text-decoration: none;
-        
+        color: #ff7a1d;
+        text-decoration: none;
+
     }
-    
-    
-    .txtCss{
-        
+
+
+    .txtCss {
+
         color: #ff7a1d;
         font-family: sans-serif;
         font-size: 12px;
-        
+
     }
-    
+
 </style>
 
 </html>
