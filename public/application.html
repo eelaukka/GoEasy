@@ -7,6 +7,7 @@
     <title>GoEasy - Calendar</title>
     <script type="text/javascript" src="todo.js"></script>
     <link rel="stylesheet" type="text/css" href="todo.css">
+    <script src="superfetch.js"></script>
 </head>
 
 <body>
@@ -31,7 +32,7 @@
 
             <form name="form">
                 <center>
-                    <input type="text" placeholder="Enter a task for this day" id="item" name="itemEntered" />
+                    <input type="text" placeholder="Enter a task for this day" id="item" name="itemEntered" onkeypress="return searchKeyPress(event);" />
                     <input type="button" value="Add task" id="addTaskButton" onclick="javascript:addItem(); ClearFields();" />
                     <input type="button" value="Remove task" id="removeTaskButton" onclick="javascript:removeItem();" />
                 </center>
@@ -44,9 +45,9 @@
         <h2>Things to do:</h2>
 
         <div id="items-container">
-
+            <hr> 
             <ul id="items-listed">
-                <hr> </ul>
+                </ul>
 
         </div>
 
@@ -60,7 +61,8 @@
     var loginData = JSON.parse(localStorage.getItem("logindata"));
 
     if (loginData == null) {
-        window.location.href = "http://localhost:8080/notfound.html";
+        window.location.href = "https://go-easy.herokuapp.com/notfound.html";
+//        window.location.href = "http://localhost:8080/notfound.html";
     }
 
 //    var inpYear = document.getElementById("inpYear");
@@ -69,7 +71,8 @@
     var mHeader = document.getElementById("user");
     var outText = document.getElementById("outText");
     var imgAvatar = document.getElementById("avatar");
-    var taskList = JSON.parse(localStorage.getItem("taskList")) || {};
+    var tasklist = JSON.parse(localStorage.getItem("tasklist"));
+    console.log(tasklist);
     var token = loginData.token;
     var mUsername = loginData.username;
     var mDataURI = loginData.avatar;
@@ -120,13 +123,13 @@
     }
 */
 
-    function createTask() {
+    function createTask(title, date) {
 
         let data = JSON.stringify({
-            title: "Godrink",
-            date: "29292922",
+            title: title,
+            date: date,
             description: "desc",
-            user: "Eetu"
+            user: loginData.username
         });
 
         var url = "https://go-easy.herokuapp.com/tasks/save?token=" + token;

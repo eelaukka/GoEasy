@@ -5,13 +5,14 @@
 <head>
     <meta charset="utf-8" />
     <title>GoEasy - Login</title>
+    <link rel="shortcut icon" type="image/png" href="https://ibb.co/epXysm"/>
     <script src="superfetch.js"></script>
 </head>
 
 <body>
     <div class="container">
         <br><br><br><br><br>
-        <img src="Pictures/logo_eksamen.png" alt="Logo" width="115" height="45">
+        <img src="Pictures/logo_eksamen.png" alt="Logo" width="180" height="75">
         <br><br><br>
         <input id="inpLoginname" placeholder="Username"> <br>
         <input id="inpPassword" placeholder="Password" type="password"> <br>
@@ -24,7 +25,7 @@
 <script>
     var regUsername = new RegExp('^[a-zA-Z0-9]+([-_]?[a-zA-Z0-9])+$');
     var regPassw = new RegExp('^([a-zA-Z0-9Ø#@&\(§!\)-_\$\*€\^%£=\+\/:\.;,\?])+$');
-
+    var token="";
 
     // init ------------------------------------------ 
     var inpLoginname = document.getElementById("inpLoginname");
@@ -60,16 +61,40 @@
         superfetch(url, "json", succ, error, cfg);
 
     }
+    
+    function loadTaskList(username, token){
+        var url = "https://go-easy.herokuapp.com/tasks/list/"+username+"/?token="+token;
+//        var url = "http://localhost:8080/tasks/list/"+username+"/?token="+token;
+
+        var cfg = {
+            method: "GET"
+
+        }
+        superfetch(url, "json", loadsucc, error, cfg);
+    }
 
     // ------------------------------------------------
     function succ(data) {
         if (data.token) {
             localStorage.setItem("logindata", JSON.stringify(data));
-//                        window.location.href = "http://localhost:8080/tasks?token=" + data.token;
-            window.location.href = "https://go-easy.herokuapp.com/tasks?token=" + data.token;
+            loadTaskList(data.username, data.token);
+            token=data.token;
         } else {
             txtMsg.innerHTML = "Something went wrong. Please try again.";
         }
+    }
+    
+    function loadsucc(data) {
+        jsonRes = data.data;
+        mList=new Array();
+        for(i=0;i<jsonRes.length;i++){
+            console.log("test");
+            mList.push(jsonRes[i]);
+        }
+        localStorage.setItem("tasklist", JSON.stringify(mList));
+//        alert("asd");
+//        window.location.href = "http://localhost:8080/tasks?token=" + token;
+            window.location.href = "https://go-easy.herokuapp.com/tasks?token=" + data.token;
     }
 
     // ------------------------------------------------
@@ -84,93 +109,119 @@
     * {
         box-sizing: border-box;
     }
-
-    .container {
+    
+     /*Edit */
+    
+    ::placeholder { 
+        
+        color: white;
+        
+    }
+    
+       .container {
         margin: auto;
         width: 50%;
         padding: 10px;
         margin-top: 12%;
         text-align: center;
     }
-
+    
     input {
         width: 40%;
         font-size: 20px;
-        border: 0px solid;
+        border: 0px solid ;
         padding: 10px;
         margin-bottom: 5px;
         border-radius: 10px;
-
         background-color: #ffaa5d;
-
+        
     }
-
-
-
-
-
+    
+    
 
     button {
-
+        
         width: 40%;
         font-size: 20px;
-        border: 0px solid;
+        border: 0px solid ;
         padding: 5px;
         margin-top: 3%;
         border-radius: 10px;
         color: white;
         background-color: #ff9937;
-
-
-
+        
+        
+        
     }
-
-    .button:hover {
-
-        background-color: #ff7a1d;
+    
+    .button:hover{
+         
+        background-color: #ff7a1d; 
         color: white;
-
-
+      
+        
+        
     }
-
-    html {
-        background: url(https://image.ibb.co/gThAyR/bakgrunn_eksamen2.png) no-repeat center center fixed #000;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
-
+    html { 
+    background: url(https://image.ibb.co/gThAyR/bakgrunn_eksamen2.png) no-repeat center center fixed #000; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}   
+    
+    input, select, textarea{
+    color: white;
+}
+    
+    
     p {
-
+        
         color: #ff7a1d;
-        font-family: sans-serif;
-
-
+        font-family: sans-serif; 
+    
+        
     }
-
+    
+    /*Edit */
+    
+    a {
+        
+        color: #ff9937 ;
+        
+    }
+    
     a:link {
-
-        text-decoration: none;
-
+   
+    text-decoration: none;
+    
     }
-
-
+    
+    
     a:hover {
-        color: #ff7a1d;
-        text-decoration: none;
-
+    color: #ff7a1d;
+    text-decoration: none;
+    font-weight: bold;
+        
     }
-
-
-    .txtCss {
-
+    
+    
+    .txtCss{
+        
         color: #ff7a1d;
         font-family: sans-serif;
-        font-size: 12px;
-
+        font-size: 15   px;
+        
     }
-
+    
+     /*Edit */
+    
+    .choose_file{
+        
+        font-size: 12px;
+        color: #ff7a1d;
+        background-color: white;
+    }
 </style>
 
 </html>

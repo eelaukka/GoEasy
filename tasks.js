@@ -63,4 +63,23 @@ router.post('/save', function (req, res, next) {
 
 });
 
+router.get('/list/:mUser', function (req, res, next) {
+    console.log(req.params.mUser)
+    client.query(`SELECT * FROM tasks_table WHERE username='${req.params.mUser}';`)
+        .then(function (data) {
+            console.log(data.rows);
+            res.status(200)
+                .json({
+                    status: 'success',
+                    message: 'Inserted one puppy',
+                    data: data.rows
+                });
+        })
+        .catch(function (err) {
+            return next(err);
+        });
+
+
+});
+
 module.exports = router;

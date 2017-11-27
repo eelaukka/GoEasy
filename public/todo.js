@@ -1,7 +1,23 @@
+var selectedDay="";
 function addItem() {
-    var item = [];
-    item = document.getElementById('items-listed');
-    item.innerHTML += "<li><input type='checkbox'>" + '&nbsp;'+ '&nbsp;' + document.form.itemEntered.value +"<hr>" + "</li>";
+    var item = document.getElementById('items-listed');
+    item.innerHTML += "<li><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + document.form.itemEntered.value +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
+    createTask(document.form.itemEntered.value, selectedDay);
+    taskJson={
+        title: document.form.itemEntered.value,
+        date: selectedDay,
+        user: loginData.username  
+    }
+    tasklist.push(taskJson);
+    
+    localStorage.setItem("tasklist", JSON.stringify(tasklist));
+    console.log(tasklist);
+    
+    console.log(selectedDay);
+}
+function addItem2(task) {
+    var item = document.getElementById('items-listed');
+    item.innerHTML += "<li><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
 }
 
 function removeItem () {
@@ -13,7 +29,33 @@ function removeItem () {
 }
 
      
-     
+function updateColor(el) {
+  el.parentNode.style.color = el.checked ? "lightgray" : "lightgray"
+}    
+
+
+// Clears inputfields when task added
+
+function ClearFields() {
+
+     document.getElementById("inputtext").value = "";
+   
+}
+
+//Adds items to list by keypress
+function searchKeyPress(e)
+{
+    // look for window.event in case event isn't passed in
+    e = e || window.event;
+    if (e.keyCode == 13)
+    {
+        document.getElementById('addTaskButton').click();
+        return false;
+    }
+    return true;
+}     
+
+
 var Cal = function(divId) {
 
 //Store div id
@@ -130,7 +172,7 @@ else if ( i == 1 ) {
     html += '<tr>';
     var k = lastDayOfLastMonth - firstDayOfMonth+1;
     for(var j=0; j < firstDayOfMonth; j++) {
-    html += "<td onclick=document.location.href='application.html' class='not-current'    >" + k + '</td>';
+    html += "<td onclick=dayClick("+i+","+k+","+chkY+") class='not-current'>" + k + '</td>';
         k++;
       }
     }
@@ -141,9 +183,9 @@ else if ( i == 1 ) {
     var chkM = chk.getMonth();
     if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
         
-      html += "<td onclick=document.location.href='application.html' class='today'>" + i + '</td>';
+      html += "<td onclick=dayClick("+i+","+this.currMonth+","+this.currYear+")  class='today'>" + i + '</td>';
     } else {
-      html += "<td onclick=document.location.href='application.html' class='normal'>" + i + '</td>';
+      html += "<td onclick=dayClick("+i+","+this.currMonth+","+this.currYear+")  class='normal'>" + i + '</td>';
     }
 // If Saturday, closes the row
     if ( dow == 6 ) {
@@ -154,7 +196,7 @@ else if ( i == 1 ) {
     else if ( i == lastDateOfMonth ) {
       var k=1;
       for(dow; dow < 6; dow++) {
-        html += "<td onclick=document.location.href='application.html' class='not-current'>" + k + '</td>';
+        html += "<td onclick=dayClick("+i+","+chkM+","+chkY+")  class='not-current'>" + k + '</td>';
         k++;
       }
         
@@ -204,5 +246,22 @@ function ClearFields() {
    
 }
        
+
+function dayClick(i, k, l){
+    var item = document.getElementById('items-listed');
+    item.innerHTML="";
+    selectedDay=""+i;
+    selectedDay+=k;
+    selectedDay+=l;
+    
+    for(i=0; i < tasklist.length;i++){
+        console.log(tasklist[i].date + "date "+selectedDay);
+        if (tasklist[i].date==selectedDay){
+                addItem2(tasklist[i]);
+            }
+        
+    }
+    
+}
 
     

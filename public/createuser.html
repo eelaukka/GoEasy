@@ -10,7 +10,7 @@
 
 <body>
     <div class="container">
-            <img src="Pictures/logo_eksamen.png" alt="Logo" width="115" height="45">
+            <img src="Pictures/logo_eksamen.png" alt="Logo" width="180" height="75">
             <br><br><br>
             <div id="inputs">
                 <input id="inpLoginname" placeholder="Username"> <br>
@@ -132,6 +132,14 @@
         box-sizing: border-box;
     }
     
+     /*Edit */
+    
+    ::placeholder { 
+        
+        color: white;
+        
+    }
+    
        .container {
         margin: auto;
         width: 50%;
@@ -147,16 +155,12 @@
         padding: 10px;
         margin-bottom: 5px;
         border-radius: 10px;
-        
         background-color: #ffaa5d;
         
     }
     
     
 
-
-
-    
     button {
         
         width: 40%;
@@ -176,6 +180,7 @@
          
         background-color: #ff7a1d; 
         color: white;
+      
         
         
     }
@@ -187,12 +192,24 @@
     background-size: cover;
 }   
     
+    input, select, textarea{
+    color: white;
+}
+    
     
     p {
         
         color: #ff7a1d;
         font-family: sans-serif; 
     
+        
+    }
+    
+    /*Edit */
+    
+    a {
+        
+        color: #ff9937 ;
         
     }
     
@@ -206,6 +223,7 @@
     a:hover {
     color: #ff7a1d;
     text-decoration: none;
+    font-weight: bold;
         
     }
     
@@ -214,9 +232,11 @@
         
         color: #ff7a1d;
         font-family: sans-serif;
-        font-size: 12px;
+        font-size: 15   px;
         
     }
+    
+     /*Edit */
     
     .choose_file{
         

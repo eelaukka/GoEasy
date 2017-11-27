@@ -16,7 +16,7 @@ router.post('/login', function (req, res, next) {
     let reqJSON = req.body;
     let mUser = reqJSON.loginname;
     let mPassword = reqJSON.password;
-
+    console.log(`SELECT * FROM user_table WHERE username='${mUser}';`);
     client.query(`SELECT * FROM user_table WHERE username='${mUser}';`)
         .then(function (data) {
             if (passwordMatchesHash(mPassword, data.rows[0].mpassword)) {
