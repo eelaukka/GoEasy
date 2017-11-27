@@ -1,12 +1,16 @@
 html,body {
   height: 100%;
+    
 }  
     
 body {
+    
+
   font-size: 100%;
   line-height: 1.5;
   font-family:sans-serif;
   background-image: url("https://www.walldevil.com/wallpapers/h14/wallpapers-orange-fantastic-wallpaper-light.jpg")
+
 
 }
 
@@ -104,6 +108,20 @@ h2 {
     text-align: center;    
 }
 
+h4 {
+    
+    color: white;
+   float: left;
+    
+    
+}
+
+#avatar{
+    
+    border-radius: 50%;
+    float: left;
+}
+
     
 li {
         
@@ -128,6 +146,7 @@ hr {
   display: table;
   clear: both;
 }
+
 img {
   max-width: 100%;
   height: auto;
@@ -261,4 +280,27 @@ input[type='checkbox'] {
     float: bottom;
     width: 20px;
     cursor: pointer;
+}
+
+#bell {
+    
+   position: relative;
+    left: 950px;
+    top: 15px; 
+  
+   
+    
+
+}
+
+.header-wrapper {
+    
+    width:100%;
+    height:70px;
+    top:0px;
+    position:absolute;
+    left:0;
+    right:0;
+    background: rgb(255, 255, 255); 
+    background: rgba(255, 255, 255, .2  ); 
 }
