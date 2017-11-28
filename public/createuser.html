@@ -13,9 +13,9 @@
             <img src="Pictures/logo_eksamen.png" alt="Logo" width="180" height="75">
             <br><br><br>
             <div id="inputs">
-                <input id="inpLoginname" placeholder="Username"> <br>
-                <input type="password" id="inpPassword" placeholder="Password"> <br>
-                <input type="password" id="inpConfirmPassword" placeholder="Confirm Password"> <br>
+                <input id="inpLoginname" placeholder="Username" maxlength="15"> <br>
+                <input type="password" id="inpPassword" placeholder="Password" maxlength="15"> <br>
+                <input type="password" id="inpConfirmPassword" placeholder="Confirm Password" maxlength="15"> <br>
                 <center>
                     <p>Add an avatar:</p> <input id="inpImage" type="file" style="width:200px" class="choose_file"> </center>
                 <button id="btnCreate" class="button">Create user</button>
@@ -60,6 +60,18 @@
     // ------------------------------------------------
 
     function createUser() {
+        if (!inpLoginname.value){
+                alert("Please input an username");
+                return;
+            }
+        if (!inpPassword.value){
+                alert("Please input a password");
+                return;
+            }
+        if (inpPassword.value != inpConfirmPassword.value) {
+                alert("Passwords don't match!");
+                return;
+            }
         let data = JSON.stringify({
             loginname: inpLoginname.value,
             password: inpPassword.value,

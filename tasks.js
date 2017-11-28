@@ -43,17 +43,15 @@ router.post('/save', function (req, res, next) {
     let mTitle = reqJSON.title;
     let mDate = reqJSON.date;
     let mDescription = reqJSON.description;
-    let mDone = true;
     let mUser = reqJSON.user;
 
-    client.query(`INSERT INTO tasks_table (title, date, description, done, username) VALUES ('${mTitle}', '${mDate}', '${mDescription}', ${mDone}, '${mUser}') RETURNING id;`)
+    client.query(`INSERT INTO tasks_table (title, date, description, username) VALUES ('${mTitle}', '${mDate}', '${mDescription}', '${mUser}') RETURNING id, title, date, description, username;`)
         .then(function (data) {
-            console.log(data.rows[0].id);
             res.status(200)
                 .json({
                     status: 'success',
                     message: 'Inserted one puppy',
-                    id: data.rows[0].id
+                    data: data.rows[0]
                 });
         })
         .catch(function (err) {
@@ -80,6 +78,21 @@ router.get('/list/:mUser', function (req, res, next) {
         });
 
 
+});
+
+router.delete('/delete/:id', function (req, res, next) {
+  var taskID = parseInt(req.params.id);
+  client.query(`DELETE FROM tasks_table WHERE id = ${taskID}`)
+    .then(function (result) {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: `Removed ${result.rowCount} task`
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
 });
 
 module.exports = router;

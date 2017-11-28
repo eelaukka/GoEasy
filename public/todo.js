@@ -1,35 +1,35 @@
 var selectedDay="";
-function addItem() {
+function addItem2(task) {    
     var item = document.getElementById('items-listed');
-    item.innerHTML += "<li><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + document.form.itemEntered.value +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
-    createTask(document.form.itemEntered.value, selectedDay);
+    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
+}
+function addItem(task) {
+    var item = document.getElementById('items-listed');
+    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
     taskJson={
-        title: document.form.itemEntered.value,
-        date: selectedDay,
+        id: task.id,
+        title: task.title,
+        date: task.date,
+        done: task.done,
         user: loginData.username  
     }
     tasklist.push(taskJson);
     
     localStorage.setItem("tasklist", JSON.stringify(tasklist));
-    console.log(tasklist);
-    
-    console.log(selectedDay);
-}
-function addItem2(task) {
-    var item = document.getElementById('items-listed');
-    item.innerHTML += "<li><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
 }
 
 function removeItem () {
   var x = [].slice.call(document.querySelectorAll("#items-listed li"));    x.filter(function(e) {
          return e.firstChild.checked
     }).forEach(function(e) {
-       e.remove();
+        deleteTask(e.id);
+        e.remove();
     })
 }
 
      
 function updateColor(el) {
+    console.log(el.parentNode.id);
   el.parentNode.style.color = el.checked ? "lightgray" : "lightgray"
 }    
 
@@ -255,7 +255,6 @@ function dayClick(i, k, l){
     selectedDay+=l;
     
     for(i=0; i < tasklist.length;i++){
-        console.log(tasklist[i].date + "date "+selectedDay);
         if (tasklist[i].date==selectedDay){
                 addItem2(tasklist[i]);
             }

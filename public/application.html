@@ -13,17 +13,18 @@
 <body>
 
     <div class="header-wrapper">
-         
-    <img id="avatar">
+        
+    <a href="https://go-easy.herokuapp.com/"><img id="avatar" title="Logout"></a>
+          
     <h4 id="user"></h4>
-        
-    <a href="Application.html"> </a><img src="https://image.ibb.co/no1dQ6/bjelle.png" alt="Logo" id="bell" width="30" height="40">
-        
-    </div>
-        
- 
-    <br><br><br><br><br>
     
+    <a href="Application.html"><img src="https://image.ibb.co/no1dQ6/bjelle.png" alt="bell" id="bell" width="30" height="40"></a>
+    <a href="Application.html"><img src="Pictures/logo_eksamen2.png" alt="logo" id="logo" width="130" height="30"></a>  
+</div>
+
+
+    <br><br><br><br><br>
+
     <center><a href="application.html"> <img src="Pictures/logo_eksamen2.png"  alt="Logo" width="180" height="80"></a></center>
     <div class="calendar-wrapper">
 
@@ -42,7 +43,7 @@
             <form name="form">
                 <center>
                     <input type="text" placeholder="Enter a task for this day" id="item" name="itemEntered" onkeypress="return searchKeyPress(event);" />
-                    <input type="button" value="Add task" id="addTaskButton" onclick="javascript:addItem(); ClearFields();" />
+                    <input type="button" value="Add task" id="addTaskButton" onclick="javascript:createTask(document.form.itemEntered.value, selectedDay); ClearFields();" />
                     <input type="button" value="Remove task" id="removeTaskButton" onclick="javascript:removeItem();" />
                 </center>
             </form>
@@ -55,7 +56,7 @@
 
         <div id="items-container">
             <ul id="items-listed">
-                </ul>
+            </ul>
 
         </div>
 
@@ -70,12 +71,12 @@
 
     if (loginData == null) {
         window.location.href = "https://go-easy.herokuapp.com/notfound.html";
-//        window.location.href = "http://localhost:8080/notfound.html";
+        //        window.location.href = "http://localhost:8080/notfound.html";
     }
 
-//    var inpYear = document.getElementById("inpYear");
-//    var inpMonth = document.getElementById("inpMonth");
-//    var btn = document.getElementById("btn");
+    //    var inpYear = document.getElementById("inpYear");
+    //    var inpMonth = document.getElementById("inpMonth");
+    //    var btn = document.getElementById("btn");
     var mHeader = document.getElementById("user");
     var outText = document.getElementById("outText");
     var imgAvatar = document.getElementById("avatar");
@@ -140,8 +141,8 @@
             user: loginData.username
         });
 
-        var url = "https://go-easy.herokuapp.com/tasks/save?token=" + token;
-//                var url = "http://localhost:8080/tasks/save?token="+token;
+                var url = "https://go-easy.herokuapp.com/tasks/save?token=" + token;
+//        var url = "http://localhost:8080/tasks/save?token=" + token;
 
         var cfg = {
             method: "POST",
@@ -155,40 +156,32 @@
     }
 
     function deleteTask(task_id) {
-        /*
-                
-                let reqJSON = req.body;
-            let mTitle = reqJSON.title;
-            let mDate = reqJSON.date;
-            let mDescription = reqJSON.description;
-            let mDone = true;
-            let mUser = reqJSON.user;*/
-
-        let data = JSON.stringify({
-            title: "Godrink",
-            date: "29292922",
-            description: "desc",
-            user: "Eetu"
-        });
-
                 var url = "https://go-easy.herokuapp.com/createuser";
-//        var url = "http://localhost:8080/tasks/save?token=" + token;
+//        var url = "http://localhost:8080/tasks/delete/" + task_id + "?token=" + token;
 
         var cfg = {
-            method: "DELETE",
-            body: data,
-            headers: {
-                "content-type": "application/json"
-            }
-
+            method: "DELETE"
         }
-        superfetch(url, "json", succ, error, cfg);
+        superfetch(url, "json", delsucc, error, cfg);
     }
 
 
     function succ(data) {
-
+        addItem(data.data);
         console.log(data);
+        //        inputs.style.display = 'none';        
+        //        txtMsg.innerHTML = data.msg;
+    }
+
+    function delsucc(data) {
+        let taskID=data.id;
+        for (i = 0; i < tasklist.length; i++) {
+            if (tasklist[i].id == taskID) {
+                tasklist.splice(i, 1);
+            }
+
+        }
+        localStorage.setItem("tasklist", JSON.stringify(tasklist));
         //        inputs.style.display = 'none';        
         //        txtMsg.innerHTML = data.msg;
     }

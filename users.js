@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs');
 const client = require('./dbconnect');
 
 var secret = 'baguettepeoplearelate';
+var regUsername = new RegExp('^[a-zA-Z0-9]+([-_]?[a-zA-Z0-9])+$');
+var regPassw = new RegExp('^([a-zA-Z0-9Ø#@&\(§!\)-_\$\*€\^%£=\+\/:\.;,\?])+$');
 
 router.get('/', function (req, res) {
     let staticApp = readTextFile("public/index.html");
@@ -16,6 +18,23 @@ router.post('/login', function (req, res, next) {
     let reqJSON = req.body;
     let mUser = reqJSON.loginname;
     let mPassword = reqJSON.password;
+    if(regUsername.test(mUser)){
+        console.log("username passed")
+    }
+    else{
+        res.statusMessage = "Invalid username";
+        res.status(400).send('Invalid username');
+        return;
+    }
+    
+    if(regPassw.test(mPassword)){
+        console.log("password passed")
+    }else{
+        res.statusMessage = "Invalid password";
+        res.status(400).send('Invalid password');
+        return;
+        
+    }
     console.log(`SELECT * FROM user_table WHERE username='${mUser}';`);
     client.query(`SELECT * FROM user_table WHERE username='${mUser}';`)
         .then(function (data) {
@@ -48,6 +67,23 @@ router.post("/createuser", function (req, res) {
     let mUser = reqJSON.loginname;
     let mPassword = reqJSON.password;
 
+    if(regUsername.test(mUser)){
+        console.log("username passed")
+    }
+    else{
+        res.statusMessage = "Invalid username";
+        res.status(400).send('Invalid username');
+        return;
+    }
+    
+    if(regPassw.test(mPassword)){
+        console.log("password passed")
+    }else{
+        res.statusMessage = "Invalid password";
+        res.status(400).send('Invalid password');
+        return;
+        
+    }
 
     if (!mUser || !mPassword) {
         return;
