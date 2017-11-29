@@ -188,10 +188,10 @@ else if ( i == 1 ) {
         selectedDay=""+i;
         selectedDay+=this.currMonth;
         selectedDay+=this.currYear;
-      html += "<td onclick=dayClick("+i+","+this.currMonth+","+this.currYear+")  class='today'>" + i + '</td>';
+      html += "<td onclick=dayClick(this,"+i+","+this.currMonth+","+this.currYear+")  class='today'>" + i + '</td>';
         
     } else {
-      html += "<td onclick=dayClick("+i+","+this.currMonth+","+this.currYear+")  class='normal'>" + i + '</td>';
+      html += "<td onclick=dayClick(this,"+i+","+this.currMonth+","+this.currYear+")  class='normal'>" + i + '</td>';
     }
 // If Saturday, closes the row
     if ( dow == 6 ) {
@@ -253,13 +253,16 @@ function ClearFields() {
 }
        
 
-function dayClick(i, k, l){
+function dayClick(el, i, k, l){
     var item = document.getElementById('items-listed');
+    var x = [].slice.call(document.querySelectorAll("td.selected"));    x.filter(function(e) {
+         e.className="normal";
+    })
     item.innerHTML="";
     selectedDay=""+i;
     selectedDay+=k;
     selectedDay+=l;
-    
+    el.className="selected";
     for(i=0; i < tasklist.length;i++){
         if (tasklist[i].date==selectedDay){
                 addItem2(tasklist[i]);

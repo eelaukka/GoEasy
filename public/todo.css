@@ -214,6 +214,17 @@ td.today {
 	
 }
 
+td.selected {
+    
+  font-weight: 700;
+  color: white;
+  font-size: 1.5em;
+  border-radius: 100%;
+    height: 75px; 
+    width: 100px;
+	background: #00b800;
+	
+}
 td:hover {
     
     color: #d5603d;
@@ -324,12 +335,45 @@ input[type='checkbox'] {
 }
 
 #avatar{
+  opacity: 1;
+  display: block;
+
+  transition: .5s ease;
+  backface-visibility: hidden;
     
     margin-left: 40px;
     position: relative;
     border-radius: 50%;
     top: 3px; 
     float: left;
+}
+
+
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+#avatar:hover {
+  opacity: 0.2;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+ 
+  color: white;
+  font-size: 16px;
+  padding: 16px 17px;
+  
+  margin-left: 20px;
 }
 
 #user{
