@@ -35,6 +35,8 @@
     var inputs = document.getElementById("inputs");
     var btnCreate = document.getElementById("btnCreate");
     var txtMsg = document.getElementById("txtMsg");
+    var pathBase="https://go-easy.herokuapp.com";
+//    var pathBase="http://localhost:8080";
 
     btnCreate.onclick = createUser;
     inpImage.onchange = selectFile;
@@ -79,7 +81,7 @@
             avatar: dataURL
         });
 
-        var url = "https://go-easy.herokuapp.com/users/createuser";
+        var url = pathBase + "/users/createuser";
 //        var url = "http://localhost:8080/users/createuser";
 
         var cfg = {
