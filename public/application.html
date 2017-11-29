@@ -45,7 +45,6 @@
                 <center>
                     <input type="text" placeholder="Add something to the list!" id="item" name="itemEntered" onkeypress="return searchKeyPress(event);" />
                     <input type="button" value="Add task" id="addTaskButton" onclick="javascript:createTask(document.form.itemEntered.value, selectedDay); ClearFields();" />
-                    <input type="button" value="Remove task" id="removeTaskButton" onclick="javascript:removeItem();" />
                 </center>
             </form>
 
@@ -181,6 +180,10 @@
 
         }
         localStorage.setItem("tasklist", JSON.stringify(tasklist));
+        var x = [].slice.call(document.querySelectorAll("li[id='"+taskID+"']"));    x.filter(function(e) {
+        e.nextSibling.remove();
+         e.remove();
+        })
         //        inputs.style.display = 'none';        
         //        txtMsg.innerHTML = data.msg;
     }

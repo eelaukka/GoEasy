@@ -1,11 +1,11 @@
 var selectedDay="";
 function addItem2(task) {    
     var item = document.getElementById('items-listed');
-    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this); updateText(this);' title='Check' type='checkbox'>" + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
+    item.innerHTML += "<li id='"+task.id+"'><div class='wrapper'><div class='left'> <input onclick='updateColor(this); updateText(this);' title='Check' type='checkbox'>" + task.title +  "</div><div class='right'> <select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select><h3 onclick='deleteTask("+task.id+");' class='close'>X</h3></div><div class='cleared'></div>" + "</div></li><hr>";
 }
 function addItem(task) {
     var item = document.getElementById('items-listed');
-    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this); updateText(this);' title='Check' type='checkbox'>" + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
+    item.innerHTML += "<li id='"+task.id+"'><div class='wrapper'><div class='left'> <input onclick='updateColor(this); updateText(this);' title='Check' type='checkbox'>" + task.title +  "</div><div class='right'> <select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select><h3 onclick='deleteTask("+task.id+");' class='close'>X</h3></div><div class='cleared'></div>" + "</div></li><hr>";
     taskJson={
         id: task.id,
         title: task.title,
@@ -17,16 +17,6 @@ function addItem(task) {
     
     localStorage.setItem("tasklist", JSON.stringify(tasklist));
 }
-
-function removeItem () {
-  var x = [].slice.call(document.querySelectorAll("#items-listed li"));    x.filter(function(e) {
-         return e.firstChild.checked
-    }).forEach(function(e) {
-        deleteTask(e.id);
-        e.remove();
-    })
-}
-
      
 function updateColor(el) {
     console.log(el.parentNode.id);
