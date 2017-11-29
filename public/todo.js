@@ -5,7 +5,7 @@ function addItem2(task) {
 }
 function addItem(task) {
     var item = document.getElementById('items-listed');
-    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
+    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this); updateText(this);' title='Check' type='checkbox'>" + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
     taskJson={
         id: task.id,
         title: task.title,

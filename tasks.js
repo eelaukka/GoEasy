@@ -82,12 +82,14 @@ router.get('/list/:mUser', function (req, res, next) {
 
 router.delete('/delete/:id', function (req, res, next) {
   var taskID = parseInt(req.params.id);
-  client.query(`DELETE FROM tasks_table WHERE id = ${taskID}`)
+  client.query(`DELETE FROM tasks_table WHERE id = ${taskID} RETURNING id;`)
     .then(function (result) {
+      console.log(result.rows[0].id);
       res.status(200)
         .json({
           status: 'success',
-          message: `Removed ${result.rowCount} task`
+          message: `Removed ${result.rowCount} task`,
+          id: result.rows[0].id
         });
     })
     .catch(function (err) {

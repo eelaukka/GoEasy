@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <title>GoEasy - Login</title>
-    <link rel="shortcut icon" type="image/png" href="https://ibb.co/epXysm"/>
+    <link rel="shortcut icon" type="image/png" href="/Pictures/favicon.ico"/>
     <script src="superfetch.js"></script>
 </head>
 
@@ -24,7 +24,8 @@
 
 <script>
     var token="";
-
+//    var pathBase="https://go-easy.herokuapp.com";
+    var pathBase="http://localhost:8080";
     // init ------------------------------------------ 
     var inpLoginname = document.getElementById("inpLoginname");
     var inpPassword = document.getElementById("inpPassword");
@@ -45,7 +46,7 @@
             /*,
                         avatar: dataURL*/ //image not working yet
         });
-        var url = "https://go-easy.herokuapp.com/users/login";
+        var url = pathBase + "/users/login";
 //                var url = "http://localhost:8080/users/login";
 
         var cfg = {
@@ -61,7 +62,7 @@
     }
     
     function loadTaskList(username, token){
-        var url = "https://go-easy.herokuapp.com/tasks/list/"+username+"/?token="+token;
+        var url = pathBase + "/tasks/list/"+username+"/?token="+token;
 //        var url = "http://localhost:8080/tasks/list/"+username+"/?token="+token;
 
         var cfg = {
@@ -92,7 +93,7 @@
         localStorage.setItem("tasklist", JSON.stringify(mList));
 //        alert("asd");
 //        window.location.href = "http://localhost:8080/tasks?token=" + token;
-            window.location.href = "https://go-easy.herokuapp.com/tasks?token=" + token;
+            window.location.href = pathBase + "/tasks?token=" + token;
     }
 
     // ------------------------------------------------

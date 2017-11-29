@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <title>GoEasy - To do list</title>
     <script type="text/javascript" src="todo.js"></script>
+    <link rel="shortcut icon" type="image/png" href="/Pictures/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="todo.css">
     <script src="superfetch.js"></script>
 </head>
@@ -18,7 +19,7 @@
           
     <h4 id="user"></h4>
     
-    <a href="application.html"><img src="https://image.ibb.co/no1dQ6/bjelle.png" alt="bell" id="bell" width="30" height="40"></a>
+    <a href="application.html"><img src="https://image.ibb.co/no1dQ6/bjelle.png" alt="bell" id="bell" width="30" height="40" align="right"></a>
     <a href="application.html"><img src="Pictures/logo_eksamen2.png" alt="logo" id="logo" width="130" height="30"></a>  
 </div>
 
@@ -140,8 +141,8 @@
             user: loginData.username
         });
 
-                var url = "https://go-easy.herokuapp.com/tasks/save?token=" + token;
-//        var url = "http://localhost:8080/tasks/save?token=" + token;
+//                var url = "https://go-easy.herokuapp.com/tasks/save?token=" + token;
+        var url = "http://localhost:8080/tasks/save?token=" + token;
 
         var cfg = {
             method: "POST",
@@ -155,8 +156,8 @@
     }
 
     function deleteTask(task_id) {
-        var url = "https://go-easy.herokuapp.com/tasks/delete/" + task_id + "?token=" + token;
-//        var url = "http://localhost:8080/tasks/delete/" + task_id + "?token=" + token;
+//        var url = "https://go-easy.herokuapp.com/tasks/delete/" + task_id + "?token=" + token;
+        var url = "http://localhost:8080/tasks/delete/" + task_id + "?token=" + token;
 
         var cfg = {
             method: "DELETE"
@@ -173,10 +174,10 @@
     }
 
     function delsucc(data) {
-        console.log(data);
         let taskID=data.id;
         for (i = 0; i < tasklist.length; i++) {
             if (tasklist[i].id == taskID) {
+                console.log("match:" + i+" and " +taskID);
                 tasklist.splice(i, 1);
             }
 
