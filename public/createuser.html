@@ -7,6 +7,7 @@
     <title>GoEasy - Create account</title>
     <link rel="shortcut icon" type="image/png" href="/Pictures/favicon.ico"/>
     <script src="superfetch.js"></script>
+    <script src="initAPI.js"></script>
 </head>
 
 <body>
@@ -35,8 +36,6 @@
     var inputs = document.getElementById("inputs");
     var btnCreate = document.getElementById("btnCreate");
     var txtMsg = document.getElementById("txtMsg");
-    var pathBase="https://go-easy.herokuapp.com";
-//    var pathBase="http://localhost:8080";
 
     btnCreate.onclick = createUser;
     inpImage.onchange = selectFile;
@@ -81,8 +80,7 @@
             avatar: dataURL
         });
 
-        var url = pathBase + "/users/createuser";
-//        var url = "http://localhost:8080/users/createuser";
+        var url = apiBase + "/users/createuser";
 
         var cfg = {
             method: "POST",

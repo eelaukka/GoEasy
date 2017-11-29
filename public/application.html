@@ -9,6 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="/Pictures/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="todo.css">
     <script src="superfetch.js"></script>
+    <script src="initAPI.js"></script>
 </head>
 
 <body>
@@ -68,8 +69,6 @@
 
 <script>
     var loginData = JSON.parse(localStorage.getItem("logindata"));
-        var pathBase="https://go-easy.herokuapp.com";
-//    var pathBase="http://localhost:8080";
     if (loginData == null) {
         window.location.href = "https://go-easy.herokuapp.com/notfound.html";
         //        window.location.href = "http://localhost:8080/notfound.html";
@@ -142,8 +141,7 @@
             user: loginData.username
         });
 
-//                var url = "https://go-easy.herokuapp.com/tasks/save?token=" + token;
-        var url = pathBase + "/tasks/save?token=" + token;
+        var url = apiBase + "/tasks/save?token=" + token;
 
         var cfg = {
             method: "POST",
@@ -157,8 +155,7 @@
     }
 
     function deleteTask(task_id) {
-//        var url = "https://go-easy.herokuapp.com/tasks/delete/" + task_id + "?token=" + token;
-        var url = pathBase + "/tasks/delete/" + task_id + "?token=" + token;
+        var url = apiBase + "/tasks/delete/" + task_id + "?token=" + token;
 
         var cfg = {
             method: "DELETE"

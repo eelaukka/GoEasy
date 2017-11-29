@@ -308,7 +308,7 @@ input[type='checkbox'] {
 #bell {
     
     margin-right: 40px;
-    position: relative;
+    position: sticky;
     top: 15px; 
 }
 

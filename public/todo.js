@@ -185,8 +185,11 @@ else if ( i == 1 ) {
     var chkY = chk.getFullYear();
     var chkM = chk.getMonth();
     if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
-        
+        selectedDay=""+i;
+        selectedDay+=this.currMonth;
+        selectedDay+=this.currYear;
       html += "<td onclick=dayClick("+i+","+this.currMonth+","+this.currYear+")  class='today'>" + i + '</td>';
+        
     } else {
       html += "<td onclick=dayClick("+i+","+this.currMonth+","+this.currYear+")  class='normal'>" + i + '</td>';
     }

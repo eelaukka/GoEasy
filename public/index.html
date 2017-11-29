@@ -7,6 +7,7 @@
     <title>GoEasy - Login</title>
     <link rel="shortcut icon" type="image/png" href="/Pictures/favicon.ico"/>
     <script src="superfetch.js"></script>
+    <script src="initAPI.js"></script>
 </head>
 
 <body>
@@ -24,8 +25,6 @@
 
 <script>
     var token="";
-    var pathBase="https://go-easy.herokuapp.com";
-//    var pathBase="http://localhost:8080";
     // init ------------------------------------------ 
     var inpLoginname = document.getElementById("inpLoginname");
     var inpPassword = document.getElementById("inpPassword");
@@ -46,8 +45,7 @@
             /*,
                         avatar: dataURL*/ //image not working yet
         });
-        var url = pathBase + "/users/login";
-//                var url = "http://localhost:8080/users/login";
+        var url = apiBase + "/users/login";
 
         var cfg = {
             method: "POST",
@@ -62,8 +60,7 @@
     }
     
     function loadTaskList(username, token){
-        var url = pathBase + "/tasks/list/"+username+"/?token="+token;
-//        var url = "http://localhost:8080/tasks/list/"+username+"/?token="+token;
+        var url = apiBase + "/tasks/list/"+username+"/?token="+token;
 
         var cfg = {
             method: "GET"
@@ -91,9 +88,7 @@
             mList.push(jsonRes[i]);
         }
         localStorage.setItem("tasklist", JSON.stringify(mList));
-//        alert("asd");
-//        window.location.href = "http://localhost:8080/tasks?token=" + token;
-            window.location.href = pathBase + "/tasks?token=" + token;
+            window.location.href = apiBase + "/tasks?token=" + token;
     }
 
     // ------------------------------------------------
