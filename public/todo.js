@@ -1,7 +1,7 @@
 var selectedDay="";
 function addItem2(task) {    
     var item = document.getElementById('items-listed');
-    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this)' title='Check' type='checkbox'>" + '&nbsp;' + '&nbsp;' + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
+    item.innerHTML += "<li id='"+task.id+"'><input onclick='updateColor(this); updateText(this);' title='Check' type='checkbox'>" + task.title +  "<select id='myList'> <option value='' disabled selected>Select Priority</option> <option value='high'>High</option><option value='medium'>Medium</option><option value='Low'>Low</option></select>" + "<hr>" + "</li>";
 }
 function addItem(task) {
     var item = document.getElementById('items-listed');
@@ -30,9 +30,12 @@ function removeItem () {
      
 function updateColor(el) {
     console.log(el.parentNode.id);
-  el.parentNode.style.color = el.checked ? "lightgray" : "lightgray"
+  el.parentNode.style.color = el.checked ? "lightgray" : "";
 }    
 
+function updateText(el){
+    el.parentNode.style.textDecoration = el.checked ? "line-through" : "";
+}
 
 // Clears inputfields when task added
 

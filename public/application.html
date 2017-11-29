@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>GoEasy - Calendar</title>
+    <title>GoEasy - To do list</title>
     <script type="text/javascript" src="todo.js"></script>
     <link rel="stylesheet" type="text/css" href="todo.css">
     <script src="superfetch.js"></script>
@@ -18,14 +18,13 @@
           
     <h4 id="user"></h4>
     
-    <a href="Application.html"><img src="https://image.ibb.co/no1dQ6/bjelle.png" alt="bell" id="bell" width="30" height="40"></a>
-    <a href="Application.html"><img src="Pictures/logo_eksamen2.png" alt="logo" id="logo" width="130" height="30"></a>  
+    <a href="application.html"><img src="https://image.ibb.co/no1dQ6/bjelle.png" alt="bell" id="bell" width="30" height="40"></a>
+    <a href="application.html"><img src="Pictures/logo_eksamen2.png" alt="logo" id="logo" width="130" height="30"></a>  
 </div>
 
 
-    <br><br><br><br><br>
+    <br><br><br>
 
-    <center><a href="application.html"> <img src="Pictures/logo_eksamen2.png"  alt="Logo" width="180" height="80"></a></center>
     <div class="calendar-wrapper">
 
         <button id="btnPrev" type="button">Prev</button>
@@ -42,7 +41,7 @@
 
             <form name="form">
                 <center>
-                    <input type="text" placeholder="Enter a task for this day" id="item" name="itemEntered" onkeypress="return searchKeyPress(event);" />
+                    <input type="text" placeholder="Add something to the list!" id="item" name="itemEntered" onkeypress="return searchKeyPress(event);" />
                     <input type="button" value="Add task" id="addTaskButton" onclick="javascript:createTask(document.form.itemEntered.value, selectedDay); ClearFields();" />
                     <input type="button" value="Remove task" id="removeTaskButton" onclick="javascript:removeItem();" />
                 </center>
@@ -156,7 +155,7 @@
     }
 
     function deleteTask(task_id) {
-                var url = "https://go-easy.herokuapp.com/createuser";
+        var url = "https://go-easy.herokuapp.com/tasks/delete/" + task_id + "?token=" + token;
 //        var url = "http://localhost:8080/tasks/delete/" + task_id + "?token=" + token;
 
         var cfg = {
