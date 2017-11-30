@@ -1,10 +1,9 @@
 html,body {
   height: 100%;
-    
+ 
 }  
     
-body {
-    
+body {  
 
   font-size: 100%;
   line-height: 1.5;
@@ -28,7 +27,7 @@ body {
     margin-top: 3%;
     border-radius: 20px;
     color: white;
-    background-color: #d5603d;
+    background-color: #f1b84d;
     cursor: pointer;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
@@ -37,10 +36,11 @@ body {
     
 #addTaskButton:hover{
          
-    background-color: #f1b84d; 
+    background-color: #d5603d; 
     color: white;
         
 }
+    
     
 ::placeholder { 
     color: white;
@@ -48,9 +48,9 @@ body {
 }
     
 input,textarea{
-    color: white;
-    color: white;
     
+    color: white;
+    color: white; 
     
 }
 
@@ -62,8 +62,7 @@ select {
     outline:0px solid;
     font-size: 18px;
     cursor: pointer;
-    text-align-last:right; 
-    
+    text-align-last:right;    
 }
 
     
@@ -75,11 +74,11 @@ input {
     padding: 10px;
     margin-bottom: 2px;
     border-radius: 20px;
-    background-color: #f1b84d;
+    background-color: #d5603d;
 }
     
 h2 {
-    color: #f1b84d;
+    color: #d5603d;
     font-family: sans-serif;
     text-align: center;    
 }
@@ -88,16 +87,29 @@ h4 {
     
     color: white;
    float: left;
-    
+       
+}
+
+label.events {
+    font-weight: bold;
+    color: #d5603d; 
+}
+
+h3 {
+    color:#d5603d;
     
 }
 
-#avatar{
+
+h3:hover {
+    color:#f1b84d;
     
-    border-radius: 50%;
-    float: left;
 }
 
+h3.eventHeader:hover {
+    color:#d5603d;
+    
+}
     
 li {
         
@@ -109,14 +121,23 @@ li {
 
 ul {
   list-style-type: none;
+
 }
 
 
 hr { 
         
     background-color: #f1b84d; 
-    height: 2px; 
+    height: 2px;
     width: 100%;
+    border:0px;
+}
+
+hr.hrEvent { 
+        
+    background-color: #f1b84d; 
+    height: 2px;
+    width: 190px;
     border:0px;
 }
 
@@ -139,14 +160,14 @@ img {
     padding: 2em;
     border: 0px solid;
     border-radius: 20px;
-    background: #fff;
+    background: white;
 }
     
 .calendar-wrapper2 {
     
     width: 600px; 
     min-height: 450px;
-    margin: 2em auto;
+    margin: 3em auto;
     padding: 2em;
     border: 0px solid;
     border-radius: 20px;
@@ -154,7 +175,6 @@ img {
 }
 
 .days {
-    
     font-weight: bold;
 }
 
@@ -189,7 +209,7 @@ td.today {
   border-radius: 100%;
     height: 75px; 
     width: 100px;
-	background: #f1b84d;
+	background: #d5603d;
 	
 }
 
@@ -201,12 +221,13 @@ td.selected {
   border-radius: 100%;
     height: 75px; 
     width: 100px;
-	background-color: rgba(241,184,77,0.3);
+    background-color: rgba(241, 184, 77, 1);
 	
 }
+
 td:hover {
     
-    color: #d5603d;
+    font-weight: 700;
     cursor: pointer;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
@@ -215,15 +236,13 @@ td:hover {
 
 td:active{
 
-    color: red;
-    
+    color: red;  
     
 }
-
    
 thead td {
   border: none;
-  color: #f1b84d;
+  color: #d5603d;
   text-transform: uppercase;
   font-size: 1.5em;
 }
@@ -232,6 +251,7 @@ thead td {
 #btnPrev {
   float: left;
   margin-bottom: 20px;
+    
 }
     
 
@@ -245,7 +265,6 @@ thead td {
   margin-bottom: 20px;
 }
     
-
 
 #btnPrev, #btnNext, #btnToday {
   background: transparent;
@@ -272,17 +291,6 @@ input[type='checkbox'] {
     cursor: pointer;
 }
 
-#bell {
-    
-   position: relative;
-    left: 950px;
-    top: 15px; 
-  
-   
-    
-
-}
-
 .header-wrapper {
     
     width:100%;
@@ -292,14 +300,15 @@ input[type='checkbox'] {
     left:0;
     right:0;
     background: rgb(255, 255, 255); 
-    background: rgba(255, 255, 255, .2  ); 
+    background: rgba(255, 255, 255, .2); 
 }
 
 #bell {
     
     margin-right: 40px;
-    position: sticky;
+    position: relative;
     top: 15px; 
+     
 }
 
 #logo {
@@ -327,8 +336,6 @@ input[type='checkbox'] {
     float: left;
 }
 
-
-
 .middle {
   transition: .5s ease;
   opacity: 0;
@@ -338,6 +345,7 @@ input[type='checkbox'] {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%)
 }
+
 #avatar:hover {
   opacity: 0.2;
 }
@@ -351,7 +359,6 @@ input[type='checkbox'] {
   color: white;
   font-size: 16px;
   padding: 16px 17px;
-  
   margin-left: 20px;
 }
 
@@ -362,11 +369,13 @@ input[type='checkbox'] {
     top: 3px; 
     float:left;   
 }
+
 .close {
     
     cursor: pointer;
     margin: 0;
-     float: right;
+    float: right;
+    
     
 }
 .left{
@@ -378,7 +387,6 @@ input[type='checkbox'] {
 }
 
 .right {
-    
     
     float:right;
     width: 170px;
@@ -393,4 +401,19 @@ input[type='checkbox'] {
 .class{
     
     clear: both;
+}
+
+#myDIV {
+    
+    position: absolute;
+    top: 70px;
+    right: 45px;
+    width: 250px; 
+    min-height: 468px;
+    margin: 2.6em auto;
+    padding: 2em;
+    border: 0px solid;
+    border-radius: 20px;
+    background: white;
+    
 }

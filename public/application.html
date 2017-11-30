@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <title>GoEasy - To do list</title>
     <script type="text/javascript" src="todo.js"></script>
-    <link rel="shortcut icon" type="image/png" href="/Pictures/favicon.ico"/>
+    <link rel="shortcut icon" type="image/png" href="/Pictures/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="todo.css">
     <script src="superfetch.js"></script>
     <script src="initAPI.js"></script>
@@ -15,17 +15,16 @@
 <body>
     <div class="text">Log out</div>
     <div class="header-wrapper">
-        
-    <a href="https://go-easy.herokuapp.com/"><img id="avatar"></a>
-          
-    <h4 id="user"></h4>
-    
-    <a href="application.html"><img src="https://image.ibb.co/no1dQ6/bjelle.png" alt="bell" id="bell" width="30" height="40" align="right"></a>
-    <a href="application.html"><img src="Pictures/logo_eksamen2.png" alt="logo" id="logo" width="130" height="30"></a>  
-</div>
+
+        <a href="https://go-easy.herokuapp.com/"><img id="avatar"></a>
+
+        <h4 id="user"></h4>
+
+        <img onclick="showDiv()" src="https://image.ibb.co/no1dQ6/bjelle.png" alt="bell" id="bell" width="30" height="40" align="right">
+        <a href="application.html"><img src="Pictures/logo_eksamen2.png" alt="logo" id="logo" width="130" height="30"></a>
+    </div>
 
 
-    <br><br><br>
 
     <div class="calendar-wrapper">
 
@@ -62,6 +61,12 @@
 
     </div>
 
+    <div id="myDIV">
+        <h3 class="eventHeader"> Upcoming tasks</h3>
+        <h4 class="events">11.11.2017<br>
+            <hr class="hrEvent">
+        </h4>
+    </div>
 
 
 </body>
@@ -79,7 +84,9 @@
     var mHeader = document.getElementById("user");
     var outText = document.getElementById("outText");
     var imgAvatar = document.getElementById("avatar");
+    var eventList = document.getElementById("myDIV");
     var tasklist = JSON.parse(localStorage.getItem("tasklist"));
+    fillNotifications();
     console.log(tasklist);
     var token = loginData.token;
     var mUsername = loginData.username;
@@ -90,46 +97,20 @@
         'src', mDataURI
     );
 
-    /*btn.onclick = function() {
+    function fillNotifications() {
+        eventList.innerHTML = "<h3 class='eventHeader'> Upcoming tasks</h3>";
+        let html = "";
+        for (i = 0; i < tasklist.length; i++) {
+            console.log(tasklist[i].done);
+            if (tasklist[i].done == false) {
+                html = `<label class="events">${tasklist[i].date}
+                        <hr class="hrEvent">
+                        </label>`;
+                eventList.innerHTML += html;
+            }
 
-        outText.innerHTML = "";
-
-        var d = new Date(inpYear.value, inpMonth.value);
-        var month = d.getMonth();
-        var i = 1;
-        var m = month;
-        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        d.setDate(i);
-
-        while (m == month) {
-            let dateId = d.toDateString().replace(/ /g, '');
-            var html = `<div class="wrapper">
-                            <div class="day" ${d.getDay() == 0 ? 'style="color: #FF0000"' : ''}>
-                                <h1>${i}</h1>                        
-                                <h3>${days[d.getDay()]}</h3>
-                            </div>
-                            <div class="taskDesc">
-                                <textarea id="${dateId}" type="text" rows="2" cols="100" onkeyup="save(this)">${dateId in taskList ? taskList[dateId] : ''}</textarea>
-                            </div>
-                            <div class="clr"></div>
-                        </div>
-                        <hr>`;
-
-            outText.innerHTML += html;
-
-            i++;
-            d.setDate(i);
-            m = d.getMonth(); //are we passed current month?           
         }
-    }*/
-
-    /*function save(context) {
-        var dayKey = context.id;
-        taskList[dayKey] = context.value;
-        localStorage.setItem("taskList", JSON.stringify(taskList));
-
     }
-*/
 
     function createTask(title, date) {
 
@@ -162,30 +143,71 @@
         superfetch(url, "json", delsucc, error, cfg);
     }
 
+    function updateTask(id, title, done, priority) {
+
+        let data = JSON.stringify({
+            id: id,
+            title: title,
+            done: done,
+            priority: priority
+        });
+
+        var url = apiBase + "/tasks/update?token=" + token;
+
+        var cfg = {
+            method: "POST",
+            body: data,
+            headers: {
+                "content-type": "application/json"
+            }
+
+        }
+        superfetch(url, "json", updsucc, error, cfg);
+    }
 
     function succ(data) {
         addItem(data.data);
         console.log(data);
+        fillNotifications();s
         //        inputs.style.display = 'none';        
         //        txtMsg.innerHTML = data.msg;
     }
 
     function delsucc(data) {
-        let taskID=data.id;
+        let taskID = data.id;
         for (i = 0; i < tasklist.length; i++) {
             if (tasklist[i].id == taskID) {
-                console.log("match:" + i+" and " +taskID);
                 tasklist.splice(i, 1);
+                break;
             }
 
         }
         localStorage.setItem("tasklist", JSON.stringify(tasklist));
-        var x = [].slice.call(document.querySelectorAll("li[id='"+taskID+"']"));    x.filter(function(e) {
-        e.nextSibling.remove();
-         e.remove();
+        var x = [].slice.call(document.querySelectorAll("li[id='" + taskID + "']"));
+        x.filter(function(e) {
+            e.nextSibling.remove();
+            e.remove();
         })
-        //        inputs.style.display = 'none';        
-        //        txtMsg.innerHTML = data.msg;
+    }
+
+    function updsucc(data) {
+        let task = data.data;
+        console.log(task);
+        for (i = 0; i < tasklist.length; i++) {
+            if (tasklist[i].id == task.id) {
+                tasklist[i].done = task.done;
+                tasklist[i].priority = task.priority;
+                tasklist[i].title = task.title;
+                var x = [].slice.call(document.querySelectorAll("li[id='" + task.id + "']"));
+                x.filter(function(e) {
+                    updateText(e);
+                    updateColor(e);
+                })
+                break;
+            }
+
+        }
+        localStorage.setItem("tasklist", JSON.stringify(tasklist));
     }
 
     // ------------------------------------------------
