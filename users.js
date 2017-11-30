@@ -18,29 +18,32 @@ router.post('/login', function (req, res, next) {
     let reqJSON = req.body;
     let mUser = reqJSON.loginname;
     let mPassword = reqJSON.password;
-    if(regUsername.test(mUser)){
+    if (regUsername.test(mUser)) {
         console.log("username passed")
-    }
-    else{
+    } else {
         res.statusMessage = "Invalid username";
         res.status(400).send('Invalid username');
         return;
     }
-    
-    if(regPassw.test(mPassword)){
+
+    if (regPassw.test(mPassword)) {
         console.log("password passed")
-    }else{
+    } else {
         res.statusMessage = "Invalid password";
         res.status(400).send('Invalid password');
         return;
-        
+
     }
     console.log(`SELECT * FROM user_table WHERE username='${mUser}';`);
     client.query(`SELECT * FROM user_table WHERE username='${mUser}';`)
         .then(function (data) {
             if (passwordMatchesHash(mPassword, data.rows[0].mpassword)) {
-                var payload = {username: data.rows[0].username};
-                var token = jwt.sign(payload, secret, {expiresIn: "12h"});
+                var payload = {
+                    username: data.rows[0].username
+                };
+                var token = jwt.sign(payload, secret, {
+                    expiresIn: "12h"
+                });
                 res.status(200)
                     .json({
                         status: 'success',
@@ -67,22 +70,21 @@ router.post("/createuser", function (req, res) {
     let mUser = reqJSON.loginname;
     let mPassword = reqJSON.password;
 
-    if(regUsername.test(mUser)){
+    if (regUsername.test(mUser)) {
         console.log("username passed")
-    }
-    else{
+    } else {
         res.statusMessage = "Invalid username";
         res.status(400).send('Invalid username');
         return;
     }
-    
-    if(regPassw.test(mPassword)){
+
+    if (regPassw.test(mPassword)) {
         console.log("password passed")
-    }else{
+    } else {
         res.statusMessage = "Invalid password";
         res.status(400).send('Invalid password');
         return;
-        
+
     }
 
     if (!mUser || !mPassword) {

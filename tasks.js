@@ -8,30 +8,29 @@ const client = require('./dbconnect');
 var path = require('path');
 
 var secret = 'baguettepeoplearelate';
-var logindata; //logindata from the token
+var logindata;
 
 router.use(function (req, res, next) {
 
-    //get the token from the URL-variable named 'token'
     var token = req.query['token'];
 
     if (!token) {
         res.status(403).json({
             msg: "No token received"
-        }); //send
-        return; //quit
+        }); 
+        return; 
     } else {
         try {
-            logindata = jwt.verify(token, secret); //check the token
+            logindata = jwt.verify(token, secret); 
         } catch (err) {
             res.status(403).json({
                 msg: "The token is not valid!"
-            }); //send
-            return; //quit
+            });
+            return; 
         }
     }
 
-    next(); //we have a valid token - go to the requested enpoint
+    next();
 });
 
 router.get('/', function (req, res) {

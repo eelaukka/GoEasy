@@ -74,20 +74,14 @@
 <script>
     var loginData = JSON.parse(localStorage.getItem("logindata"));
     if (loginData == null) {
-        window.location.href = "https://go-easy.herokuapp.com/notfound.html";
-        //        window.location.href = "http://localhost:8080/notfound.html";
+        window.location.href = apiBase + "/notfound.html";
     }
-
-    //    var inpYear = document.getElementById("inpYear");
-    //    var inpMonth = document.getElementById("inpMonth");
-    //    var btn = document.getElementById("btn");
     var mHeader = document.getElementById("user");
     var outText = document.getElementById("outText");
     var imgAvatar = document.getElementById("avatar");
     var eventList = document.getElementById("myDIV");
     var tasklist = JSON.parse(localStorage.getItem("tasklist"));
     fillNotifications();
-    console.log(tasklist);
     var token = loginData.token;
     var mUsername = loginData.username;
     var mDataURI = loginData.avatar;
@@ -103,7 +97,6 @@
         selectedDay = currentDate.getDate() < 10 ? "0" + currentDate.getDate() + "." : "" + currentDate.getDate() + ".";
         selectedDay += currentDate.getMonth() < 9 ? "0" + (currentDate.getMonth() + 1) + "." : "" + (currentDate.getMonth() + 1) + ".";
         selectedDay += currentDate.getFullYear();
-        console.log(selectedDay);
         for (i = 0; i < tasklist.length; i++) {
             if (tasklist[i].date == selectedDay) {
                 addItem2(tasklist[i]);
@@ -115,7 +108,6 @@
 
     function fillNotifications() {
         var currentDate = new Date();
-        console.log(currentDate);
         eventList.innerHTML = "<h3 class='eventHeader'> Upcoming tasks</h3>";
         let html = "";
         for (i = 0; i < tasklist.length; i++) {
@@ -128,9 +120,8 @@
             }
             var cleanDate = new Date(taskDate[2], taskDate[1] - 1, taskDate[0], 23, 59, 59);
             cleanDate.setMonth(cleanDate.getMonth());
-            console.log(cleanDate >= currentDate);
             if (tasklist[i].done == false && cleanDate >= currentDate) {
-                html = `<label class="events">${tasklist[i].date} - ${tasklist[i].priority}
+                html = `<label class="events">${tasklist[i].date} - ${tasklist[i].priority}<br>${tasklist[i].title.slice(0, 20)}${tasklist[i].title.length>20 ? '...' : ''}
                         <hr class="hrEvent">
                         </label>`;
                 eventList.innerHTML += html;
@@ -194,11 +185,7 @@
 
     function succ(data) {
         addItem(data.data);
-        console.log(data);
         fillNotifications();
-        s
-        //        inputs.style.display = 'none';        
-        //        txtMsg.innerHTML = data.msg;
     }
 
     function delsucc(data) {
@@ -221,7 +208,6 @@
 
     function updsucc(data) {
         let task = data.data;
-        console.log(task);
         for (i = 0; i < tasklist.length; i++) {
             if (tasklist[i].id == task.id) {
                 tasklist[i].done = task.done;
@@ -244,7 +230,6 @@
     function error(error) {
 
         console.log(error);
-        //txtMsg.innerHTML = "Something went wrong. Please try again.";
     }
 
     function logout() {

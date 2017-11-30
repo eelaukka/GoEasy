@@ -17,7 +17,7 @@ app.use('/tasks/', tasks);
 
 app.use(function (err, req, res, next) {
     console.error(err.stack);
-    res.status(500).send('Noe gikk veldig galt med serveren vår. Prøv igjenn siden. Send oss gjerne en epost.');
+    res.status(500).send('Something kaboomed on the server, sorry.');
 });
 
 app.listen(app.get('port'), function () {

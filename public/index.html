@@ -42,8 +42,6 @@
         let data = JSON.stringify({
             loginname: inpLoginname.value,
             password: inpPassword.value
-            /*,
-                        avatar: dataURL*/ //image not working yet
         });
         var url = apiBase + "/users/login";
 
@@ -93,7 +91,6 @@
 
     // ------------------------------------------------
     function error(error) {
-        console.log(error);
         txtMsg.innerHTML = "Something went wrong. Please try again.";
     }
 
@@ -104,7 +101,6 @@
         box-sizing: border-box;
     }
     
-     /*Edit */
     
     ::placeholder { 
         
@@ -177,7 +173,6 @@
         
     }
     
-    /*Edit */
     
     a {
         
@@ -208,7 +203,6 @@
         
     }
     
-     /*Edit */
     
     .choose_file{
         
