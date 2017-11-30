@@ -16,7 +16,7 @@
     <div class="text">Log out</div>
     <div class="header-wrapper">
 
-        <a href="https://go-easy.herokuapp.com/"><img id="avatar"></a>
+        <a onClick=logout()><img id="avatar"></a>
 
         <h4 id="user"></h4>
 
@@ -51,7 +51,7 @@
 
 
 
-        <h2>Things to do:</h2>
+        <h2>Things to do</h2>
 
         <div id="items-container">
             <ul id="items-listed">
@@ -98,11 +98,24 @@
     );
 
     function fillNotifications() {
+//        var currentDate = new Date();
+        
         eventList.innerHTML = "<h3 class='eventHeader'> Upcoming tasks</h3>";
         let html = "";
         for (i = 0; i < tasklist.length; i++) {
-            console.log(tasklist[i].done);
-            if (tasklist[i].done == false) {
+/*            let taskDate=tasklist[i].date.split(".");
+            console.log(taskDate[1]);
+            console.log("daattorrr");
+            if (taskDate[0].startsWith("0")){
+                taskDate[0]=taskDate[0].substr(1);
+            }
+            if (taskDate[1].startsWith("0")){
+                taskDate[1]=taskDate[1].substr(1);
+            }
+            var cleanDate=new Date(taskDate[2], taskDate[1]-1, taskDate[0]);;
+            cleanDate.setMonth(cleanDate.getMonth());
+            console.log(cleanDate>=currentDate);*/
+            if (tasklist[i].done == false /*&& cleanDate>=currentDate*/) {
                 html = `<label class="events">${tasklist[i].date}
                         <hr class="hrEvent">
                         </label>`;
@@ -188,6 +201,7 @@
             e.nextSibling.remove();
             e.remove();
         })
+        fillNotifications();
     }
 
     function updsucc(data) {
@@ -215,6 +229,12 @@
 
         console.log(error);
         //txtMsg.innerHTML = "Something went wrong. Please try again.";
+    }
+    
+    function logout(){
+        localStorage.removeItem("tasklist");
+        localStorage.removeItem("logindata");
+        window.location.href=apiBase;
     }
 
 </script>

@@ -133,6 +133,10 @@ hr {
     border:0px;
 }
 
+tr{
+    height: 75px;
+}
+
 hr.hrEvent { 
         
     background-color: #f1b84d; 
@@ -236,7 +240,7 @@ td:hover {
 
 td:active{
 
-    color: red;  
+  color: #d5603d;
     
 }
    
@@ -308,6 +312,7 @@ input[type='checkbox'] {
     margin-right: 40px;
     position: relative;
     top: 15px; 
+    cursor:pointer;
      
 }
 
