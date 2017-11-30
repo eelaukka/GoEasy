@@ -4,7 +4,7 @@ function addItem2(task) {
     var item = document.getElementById('items-listed');
     let checked = task.done ? "checked=true" : "";
     let optionSelected = task.priority == "" ? "" : "<option selected='selected'>" + task.priority + "</option>";
-    item.innerHTML += "<li id='" + task.id + "'><div class='wrapper'><div class='left'><input onclick='saveTask(" + task.id + ");' title='Check' type='checkbox' " + checked + ">" + task.title + "</div><div class='right'> <select id='myList' onChange=savePriority(" + task.id + ")> <option value='' disabled selected>Select Priority</option> <option value='high' " + (task.priority == "high" ? "selected" : "") + ">High</option><option value='medium' " + (task.priority == "medium" ? "selected" : "") + ">Medium</option><option value='low' " + (task.priority == "low" ? "selected" : "") + ">Low</option></select><h3 onclick='deleteTask(" + task.id + ");' class='close'>x</h3></div><div class='cleared'></div>" + "</div></li><hr>";
+    item.innerHTML += "<li id='" + task.id + "'><div class='wrapper'><div class='left'><input onclick='saveTask(" + task.id + ");' title='Check' type='checkbox' " + checked + ">" + task.title + "</div><div class='right'> <select id='myList' onChange=savePriority(" + task.id + ")> <option value='' disabled selected>Select Priority</option> <option value='High' " + (task.priority == "High" ? "selected" : "") + ">High</option><option value='Medium' " + (task.priority == "Medium" ? "selected" : "") + ">Medium</option><option value='Low' " + (task.priority == "Low" ? "selected" : "") + ">Low</option></select><h3 onclick='deleteTask(" + task.id + ");' class='close'>x</h3></div><div class='cleared'></div>" + "</div></li><hr>";
     if (checked != "") {
         var x = [].slice.call(document.querySelectorAll("li[id='" + task.id + "']"));
         x.filter(function (e) {
@@ -19,7 +19,7 @@ function addItem(task) {
     let checked = task.done ? "checked=true" : "";
     let optionSelected = task.priority == "" ? "" : "<option selected='selected'>" + task.priority + "</option>";
     var item = document.getElementById('items-listed');
-    item.innerHTML += "<li id='" + task.id + "'><div class='wrapper'><div class='left'><input onclick='saveTask(" + task.id + ");' title='Check' type='checkbox'" + checked + ">" + task.title + "</div><div class='right'> <select id='myList' onChange=savePriority(" + task.id + ")> <option value='' disabled selected>Select Priority</option> <option value='high' " + (task.priority == "high" ? "selected" : "") + ">High</option><option value='medium' " + (task.priority == "medium" ? "selected" : "") + ">Medium</option><option value='low' " + (task.priority == "low" ? "selected" : "") + ">Low</option></select><h3 onclick='deleteTask(" + task.id + ");' class='close'>x</h3></div><div class='cleared'></div>" + "</div></li><hr>";
+    item.innerHTML += "<li id='" + task.id + "'><div class='wrapper'><div class='left'><input onclick='saveTask(" + task.id + ");' title='Check' type='checkbox'" + checked + ">" + task.title + "</div><div class='right'> <select id='myList' onChange=savePriority(" + task.id + ")> <option value='' disabled selected>Select Priority</option> <option value='High' " + (task.priority == "High" ? "selected" : "") + ">High</option><option value='Medium' " + (task.priority == "Medium" ? "selected" : "") + ">Medium</option><option value='Low' " + (task.priority == "Low" ? "selected" : "") + ">Low</option></select><h3 onclick='deleteTask(" + task.id + ");' class='close'>x</h3></div><div class='cleared'></div>" + "</div></li><hr>";
     taskJson = {
         id: task.id,
         title: task.title,
@@ -222,10 +222,12 @@ Cal.prototype.showMonth = function (y, m) {
         var chkY = chk.getFullYear();
         var chkM = chk.getMonth();
         if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
-            selectedDay = "" + i;
-            selectedDay += this.currMonth;
+            selectedDay = i < 10 ? "0" + i + "." : "" + i + ".";
+            selectedDay += this.currMonth < 9 ? "0" + (this.currMonth + 1) + "." : "" + (this.currMonth + 1) + ".";
             selectedDay += this.currYear;
+
             html += "<td onclick=dayClick(this," + i + "," + this.currMonth + "," + this.currYear + ")  class='today'>" + i + '</td>';
+
 
         } else {
             html += "<td onclick=dayClick(this," + i + "," + this.currMonth + "," + this.currYear + ")  class='normal'>" + i + '</td>';
@@ -262,7 +264,7 @@ var c = new Cal("divCal");
 window.onload = function () {
 
     // Start calendar
-    
+
     c.showcurr();
 
     // Bind next and previous button clicks
@@ -297,14 +299,14 @@ function dayClick(el, i, k, l) {
         e.className = "normal";
     })
     item.innerHTML = "";
-    selectedDay = i < 10 ? "0" + i+"." : "" + i+".";
-    selectedDay += k < 9 ? "0" + (k+1)+"." : "" + (k+1)+".";
+    selectedDay = i < 10 ? "0" + i + "." : "" + i + ".";
+    selectedDay += k < 9 ? "0" + (k + 1) + "." : "" + (k + 1) + ".";
     selectedDay += l;
     console.log(selectedDay);
-    if(el.className!="today"){
-       
-    el.className = "selected";
-       }
+    if (el.className != "today") {
+
+        el.className = "selected";
+    }
     for (i = 0; i < tasklist.length; i++) {
         if (tasklist[i].date == selectedDay) {
             addItem2(tasklist[i]);
