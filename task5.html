@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Testing...</title>
+</head>
+
+<body>    
+    <input id="inpYear" type="text">
+    <select id="inpMonth">
+        <option value=0>January</option>
+        <option value=1>February</option>
+        <option value=2>March</option>
+        <option value=3>April</option>
+        <option value=4>May</option>
+        <option value=5>June</option>
+        <option value=6>July</option>
+        <option value=7>August</option>
+        <option value=8>September</option>
+        <option value=9>October</option>
+        <option value=10>November</option>
+        <option value=11>December</option>
+    </select>
+    <button id="btn">Show days</button>
+    <div id="outText"></div>   
+</body>
+    
+<script>
+    
+    var inpYear = document.getElementById("inpYear");    
+    var inpMonth = document.getElementById("inpMonth");    
+    var btn = document.getElementById("btn");
+    var outText = document.getElementById("outText");
+    var taskList = JSON.parse(localStorage.getItem("taskList")) || {};
+    console.log(taskList);
+    btn.onclick = function() {
+        
+        outText.innerHTML = "";        
+
+        var d = new Date(inpYear.value, inpMonth.value);        
+        var month = d.getMonth();        
+        var i = 1;
+        var m = month;
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        d.setDate(i);
+        
+        while (m == month) {
+            let dateId = d.toDateString().replace(/ /g, '');
+            var html = `<div class="wrapper">
+                            <div class="day" ${d.getDay() == 0 ? 'style="color: #FF0000"' : ''}>
+                                <h1>${i}</h1>                        
+                                <h3>${days[d.getDay()]}</h3>
+                            </div>
+                            <div class="taskDesc">
+                                <textarea id="${dateId}" type="text" rows="2" cols="100" onkeyup="save(this)">${dateId in taskList ? taskList[dateId] : ''}</textarea>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                        <hr>`;
+            
+            outText.innerHTML += html;
+            
+            i++;
+            d.setDate(i);
+            m = d.getMonth(); //are we passed current month?           
+        }
+    }
+    
+    function save(context){
+        var dayKey = context.id;
+        taskList[dayKey] = context.value;
+        localStorage.setItem("taskList", JSON.stringify(taskList));
+        
+    }
+    
+    
+</script>
+    
+<style>
+    
+    .wrapper{
+        display: table-row;
+        height: auto;
+    }
+    
+    .day {
+        display: table-cell;
+        width: 150px;
+    }
+    
+    .taskDesc{
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .day>h3 {
+        line-height: 5px;
+    }
+    .day>h1 {
+        line-height: 0px;
+    }
+   
+
+    
+</style>
+    
+
+    
+</html>
+

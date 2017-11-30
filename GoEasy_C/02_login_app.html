@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GoEasy - Login</title>
+  <script src="superfetch2.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <img src="Pictures/Artboard%201.png" alt="Logo" width="300" height="110"> 
+        <br><br><br>
+        <input id="inpLoginname" placeholder="Username" required > <br>
+        <input id="inpPassword" placeholder="Password" type="password" required > <br>   
+        <button id="btnLogin" class="button">Login</button>
+        <p>Don't have a user? <a href="02_create_user_app.html">Create user here</a></p>    
+        <h3 id="txtMsg" class="txtCss"></h3>
+    </div>
+</body>
+    
+<script>
+    
+    // init ------------------------------------------ 
+    var inpLoginname = document.getElementById("inpLoginname");
+    var inpPassword  = document.getElementById("inpPassword");   
+    var btnLogin    = document.getElementById("btnLogin");
+    var txtMsg       = document.getElementById("txtMsg");    
+    
+    btnLogin.onclick = loginUser;       
+
+    // ------------------------------------------------
+    function loginUser() {        
+        
+        var url = "http://go-easy.herokuapp.com/login";
+        
+        //var url = "http://localhost:8080/blogfog/users/auth/";
+        
+        var fdata = new FormData();        
+        fdata.append("loginname", inpLoginname.value);
+        fdata.append("password", inpPassword.value);     
+        
+        var cfg = {
+            method: "POST",
+            body: fdata
+        }
+        superfetch(url, "json", succ, error, cfg);      
+    }
+    
+    // ------------------------------------------------
+    function succ(data) {        
+        
+        if(data.token) {
+            
+            localStorage.setItem("blogfogData", JSON.stringify(data));
+            window.location.href = "02_calendar_app.html";
+        }
+        else {
+            txtMsg.innerHTML = "Something went wrong. Please try again.";
+        }
+    }
+    
+    // ------------------------------------------------
+    function error(error) {
+               
+        txtMsg.innerHTML = "Something went wrong. Please try again.";      
+    }    
+    
+</script>
+    
+<style>
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+       .container {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        margin-top: 12%;
+        text-align: center;
+    }
+    
+    input {
+        width: 30%;
+        font-size: 20px;
+        border: 0px solid ;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        
+    }
+    
+    button {
+        
+        width: 30%;
+        font-size: 20px;
+        border: 0px solid ;
+        padding: 5px;
+        margin-top: 3%;
+        border-radius: 10px;
+        color: white;
+        background-color: #ffbf5b;
+        
+        
+        
+    }
+    
+    .button:hover{
+         
+        background-color: #f5402c; 
+        color: white;
+        
+        
+    }
+    
+    
+    body {
+        
+        background-image: url("https://umad.com/img/2015/11/orange-wallpaper-background-1002-1073-hd-wallpapers.jpg ");
+    }
+    
+    p {
+        
+        color: white;
+        font-family: sans-serif; 
+    
+        
+    }
+    
+    a:link {
+   
+    text-decoration: none;
+    
+    }
+    
+    
+    a:hover {
+    color: #f5402c;
+    text-decoration: none;
+        
+    }
+    
+    
+    .txtCss{
+        
+        color: white;
+        font-family: sans-serif;
+        
+    }
+    
+    
+</style>
+    
+</html>
+
+
